@@ -39,9 +39,14 @@ export const generateMetadata = async (): Promise<Metadata> => {
 const MentionsLegales = async () => {
     const policy = await getPrivacyPolicy();
     return (
-        <div className="py-8 md:py-12">
-            <RichText content={policy.content} />
-        </div>
+        <>
+            <head>
+                <meta name="robots" content="noindex, follow"/>
+            </head>
+            <div className="py-8 md:py-12">
+                <RichText content={policy.content}/>
+            </div>
+        </>
     );
 };
 

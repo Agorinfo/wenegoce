@@ -40,32 +40,40 @@ const Rgpd = async () => {
     const rgpd = await getRgpd();
 
     return (
-        <div className="py-8 md:py-12 text-sm">
-            <RichText content={rgpd.content} />
-            <div className="border">
-                <div className="hidden md:flex divide-x md:justify-between md:items-center md:py-2 md:border-b">
-                    <span className="inline-block pl-4 font-semibold">
-                        Type de Données
-                    </span>
-                    <div className="divide-x">
-                        <span className="inline-block w-[170px] text-center font-semibold">Données des salariés</span>
-                        <span className="inline-block w-[170px] text-center font-semibold">Données des tiers</span>
-                    </div>
-                </div>
-
-                {rgpd.tableData.map((item:any) => (
-                    <div className="border-b" key={item.id}>
-                        <div className="divide-x flex flex-col md:flex-row justify-between md:items-center py-2">
-                            <span className='inline-block pl-4'>{item.type}</span>
-                            <div className="divide-x flex items-center justify-center md:justify-normal">
-                                <span className="inline-block w-[170px] text-center"><span className="md:hidden text-sm">Employés : </span>{item.employeeData ? "✔️" : "❌"}</span>
-                                <span className="inline-block w-[170px] text-center"><span className="md:hidden text-sm">Tiers : </span>{item.thirdPartyData ? "️✔️" : "❌"}</span>
-                            </div>
+        <>
+            <head>
+                <meta name="robots" content="noindex, follow"/>
+            </head>
+            <div className="py-8 md:py-12 text-sm">
+                <RichText content={rgpd.content}/>
+                <div className="border">
+                    <div className="hidden md:flex divide-x md:justify-between md:items-center md:py-2 md:border-b">
+                        <span className="inline-block pl-4 font-semibold">
+                            Type de Données
+                        </span>
+                        <div className="divide-x">
+                            <span
+                                className="inline-block w-[170px] text-center font-semibold">Données des salariés</span>
+                            <span className="inline-block w-[170px] text-center font-semibold">Données des tiers</span>
                         </div>
                     </div>
-                ))}
+
+                    {rgpd.tableData.map((item: any) => (
+                        <div className="border-b" key={item.id}>
+                            <div className="divide-x flex flex-col md:flex-row justify-between md:items-center py-2">
+                                <span className='inline-block pl-4'>{item.type}</span>
+                                <div className="divide-x flex items-center justify-center md:justify-normal">
+                                    <span className="inline-block w-[170px] text-center"><span
+                                        className="md:hidden text-sm">Employés : </span>{item.employeeData ? "✔️" : "❌"}</span>
+                                    <span className="inline-block w-[170px] text-center"><span
+                                        className="md:hidden text-sm">Tiers : </span>{item.thirdPartyData ? "️✔️" : "❌"}</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

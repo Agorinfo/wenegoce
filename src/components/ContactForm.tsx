@@ -34,54 +34,6 @@ const ContactForm = () => {
         body: JSON.stringify(contact)
     };
 
-    // const handleSubmit = async (e: any) => {
-    //     e.preventDefault();
-    //     try {
-    //         const response = await fetch(`${url}/api/send-contact`, options)
-    //             .then((res) => res.json());
-    //         toast.success("Message envoyé !")
-    //     } catch (error) {
-    //         toast.error("Une erreur est survenu, réessayez ultérieurement...")
-    //     } finally {
-    //         setContact({
-    //             firstname: "",
-    //             name: "",
-    //             company:"",
-    //             email: "",
-    //             tel: "",
-    //             object: "",
-    //             message: ""
-    //         });
-    //     }
-    // };
-
-    // async function handleSubmit(event: any) {
-    //
-    //     event.preventDefault();
-    //     const formData = new FormData(event.target)
-    //     try {
-    //
-    //         const response = await fetch('/api/send-contact', {
-    //             method: 'post',
-    //             body: formData,
-    //         });
-    //
-    //         if (!response.ok) {
-    //             console.log("falling over")
-    //             throw new Error(`response status: ${response.status}`);
-    //         }
-    //         const responseData = await response.json();
-    //         console.log(responseData['message'])
-    //         toast.success("Message envoyé !")
-    //         // alert('Message successfully sent');
-    //     } catch (err) {
-    //         console.error(err);
-    //         toast.error("Une erreur est survenue")
-    //         // alert("Error, please try resubmitting the form");
-    //     } finally {
-    //         event.target.reset();
-    //     }
-    // };
      const handleSubmit = (e: any) => {
          send("Test Mail", `
         <h1>Hello World</h1>
@@ -93,9 +45,10 @@ const ContactForm = () => {
         queryFn: getGlobal
     })
 
-    const {siteName, street, adressComp, zipCode, city, tel, email} = data;
+    const {siteName, street, adressComp, zipCode, city, tel, email, addressComp, portalUrl} = data;
 
     const telUrl= tel.replaceAll(" ", "").substring(1);
+    const telCompUrl = addressComp.tel.replaceAll(" ", "").substring(1);
 
     if(isLoading) return <Loader />
 
@@ -126,21 +79,33 @@ const ContactForm = () => {
                     <div className="pb-6 hidden lg:block">
                         <img src="/logotype.webp" alt="Agorinfo"/>
                     </div>
-                    <div className="flex flex-col gap-2 pb-6">
-                        <h3 className="text-h4 font-bold">{siteName}</h3>
-                        <div className="flex flex-col items-start">
-                        <span>{street}</span>
-                            <span>{adressComp}</span>
-                            <span>{zipCode} {city}</span>
+                    <div className="divide-y">
+                        <div className="flex flex-col gap-2 pb-6">
+                            <h3 className="text-h4 font-bold">{siteName}</h3>
+                            <h3 className="text-h6 font-bold">À Rouen</h3>
+                            <div className="flex flex-col items-start">
+                            <span>{street}</span>
+                                <span>{adressComp}</span>
+                                <span>{zipCode} {city}</span>
+                            </div>
+                            <a className="link-normal" href={"tel:+33" + telUrl}>{tel}</a>
+                            <a className="link-normal" href={"mailto:" + email}>{email}</a>
                         </div>
-                        <a className="link-normal" href={"tel:+33" + telUrl}>{tel}</a>
-                        <a className="link-normal" href={"mailto:" + email}>{email}</a>
+                        <div className="flex flex-col gap-2 py-6">
+                            <h3 className="text-h6 font-bold">{addressComp.name}</h3>
+                            <div className="flex flex-col items-start">
+                            <span>{addressComp.address}</span>
+                                <span>{addressComp.zipCode} {addressComp.city}</span>
+                            </div>
+                            <a className="link-normal" href={"tel:+33" + telCompUrl}>{addressComp.tel}</a>
+                            <a className="link-normal" href={"mailto:" + addressComp.email}>{addressComp.email}</a>
+                        </div>
                     </div>
                 </div>
                 <div className="pb-8">
                     <h4 className="text-h4 font-bold">Besoin d&apos;assistance ? </h4>
                     <p className="text-grayscale-darkest pb-6">Envoyez votre demande au support technique</p>
-                    <Button label="Créer un ticket" url={"https://agorinfo.atlassian.net/servicedesk/customer/portals"} className="btn btn-gray"/>
+                    {portalUrl && <Button label="Créer un ticket" url={portalUrl} className="btn btn-gray"/>}
                 </div>
             </div>
             <div className={`p-8 lg:w-[50vw] max-w-[48rem] ${active === "formulaire" ? "block" : "hidden lg:block"}`}>

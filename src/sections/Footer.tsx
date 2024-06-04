@@ -63,11 +63,11 @@ const Footer = ({}) => {
                 ))}
             </div>
             <div className="border-b pt-14 text-sm flex items-baseline gap-1">
-                Agorinfo est une société de <a href="https://www.wesoft.fr/" target="_blank" rel="noreferrer"><img
+                WeNégoce est un editeur de <a href="https://www.wesoft.fr/" target="_blank" rel="noreferrer"><img
                 src="/logotype-wesoft.png" alt="Société We Soft"/></a>
             </div>
             <div className="text-center text-sm text-grayscale-darker py-8 ">
-                © {currenYear === 2024 ? currenYear : "2024-" + new Date().getFullYear()} - AGORINFO. Tous droits
+                © {currenYear === 2024 ? currenYear : "2024-" + new Date().getFullYear()} - WENEGOCE. Tous droits
                 réservés.
             </div>
         </footer>

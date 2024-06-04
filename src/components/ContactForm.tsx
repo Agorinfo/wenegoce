@@ -4,12 +4,12 @@ import {useQuery} from "@tanstack/react-query";
 import getGlobal from "@/actions/getGlobal";
 import Loader from "@/components/Loader";
 import Button from "@/components/Button";
-import toast from "react-hot-toast";
-import {sendMail} from "@/utils/sendEmail";
 import send from "@/actions/SendEmail";
+import emptyImg from "@/assets/empty-img.png"
 
 const ContactForm = () => {
     const url = process.env.NEXT_PUBLIC_FRONT_URL;
+    const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     const [active, setActive] = useState("formulaire");
     const [contact, setContact] = useState({
         firstname: "",
@@ -45,7 +45,7 @@ const ContactForm = () => {
         queryFn: getGlobal
     })
 
-    const {siteName, street, adressComp, zipCode, city, tel, email, addressComp, portalUrl} = data;
+    const {siteName, street, adressComp, zipCode, city, tel, email, addressComp, portalUrl, logo} = data;
 
     const telUrl= tel.replaceAll(" ", "").substring(1);
     const telCompUrl = addressComp.tel.replaceAll(" ", "").substring(1);
@@ -56,7 +56,7 @@ const ContactForm = () => {
 
     return (
         <div className="flex flex-col lg:flex-row bg-white">
-            <h2 className="text-h3 font-bold capitalize pt-8 px-8 pb-6 lg:hidden">Contacter {siteName}</h2>
+            <h2 className="text-h3 font-bold capitalize pt-8 px-8 pb-6 lg:hidden">Contacter <span className="text-[#3965bd] font-bold">We</span><span className='font-light text-[#646464]'>Négoce</span></h2>
             <div className="lg:hidden px-8 flex">
                 <div className="flex justify-start items-start gap-1 rounded-lg border overflow-clip">
                     <button
@@ -76,12 +76,11 @@ const ContactForm = () => {
             <div
                 className={`p-8 flex flex-col justify-between items-start lg:border-r lg:border-grayscale-lighter lg:w-[33.333vw] max-w-[32rem] lg:block ${active === "coordonnees" ? "block" : "hidden lg:block"}`}>
                 <div className="">
-                    <div className="pb-6 hidden lg:block">
-                        <img src="/logotype.webp" alt="Agorinfo"/>
+                    <div className="pb-6 hidden lg:block w-[17.5rem]">
+                        <img className="w-full" src={logo.data ? backUrl + logo.data.attributes.url : emptyImg.src} alt={logo.data.attributes.alternativeText} />
                     </div>
                     <div className="divide-y">
                         <div className="flex flex-col gap-2 pb-6">
-                            <h3 className="text-h4 font-bold">{siteName}</h3>
                             <h3 className="text-h6 font-bold">À Rouen</h3>
                             <div className="flex flex-col items-start">
                             <span>{street}</span>
@@ -109,7 +108,7 @@ const ContactForm = () => {
                 </div>
             </div>
             <div className={`p-8 lg:w-[50vw] max-w-[48rem] ${active === "formulaire" ? "block" : "hidden lg:block"}`}>
-                <h2 className="text-h3 font-bold capitalize pb-6 hidden lg:block">Contacter {siteName}</h2>
+                <h2 className="text-h3 font-bold capitalize pb-6 hidden lg:block">Contacter <span className="text-[#3965bd] font-bold">We</span><span className='font-light text-[#646464]'>Négoce</span></h2>
                 <form className="grid sm:grid-cols-2 gap-4">
                     <label className="label-style" htmlFor="firstname">
                         Prénom *

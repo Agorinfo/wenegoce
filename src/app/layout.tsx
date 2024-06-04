@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import {Inter} from "next/font/google";
+import { Open_Sans} from "next/font/google";
 import "./globals.css";
 import React from "react";
 import getGlobal from "@/actions/getGlobal";
@@ -12,7 +12,7 @@ import getFooter from "@/actions/getFooter";
 import {Toaster} from "react-hot-toast";
 import Modal from "@/components/Modal";
 
-const inter = Inter({subsets: ["latin"]});
+const openSans = Open_Sans({subsets: ["latin"]});
 
 export default async function RootLayout({
                                              children,
@@ -37,7 +37,7 @@ export default async function RootLayout({
         <head>
             <meta name="robots" content="noindex, follow" />
         </head>
-        <body className={`${inter.className} overflow-x-hidden`}>
+        <body className={`${openSans.className} overflow-x-hidden`}>
         <UseReactQuery>
             <HydrationBoundary state={dehydrate(queryClient)}>
                 <div id="modal-root"></div>

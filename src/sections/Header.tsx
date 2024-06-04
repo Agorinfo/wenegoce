@@ -32,7 +32,7 @@ const Header = () => {
     return (
         <header className="border-b border-greyscale-lightest bg-white shadow-nav overflow-x-clip">
             <div className="flex items-center justify-between py-6 relative max-w-screen-xl mx-auto px-4 md:px-8 xl:px-0">
-                <Link className="w-[130px]" href="/"><img className="w-full h-full object-contain" src={logo ? backUrl + logo : emptyImg.src} alt="Agorinfo"/></Link>
+                <Link className="w-[160px]" href="/"><img className="w-full h-full object-contain" src={logo ? backUrl + logo : emptyImg.src} alt="Agorinfo"/></Link>
                 <Nav navItems={data.navItems} isOpen={isOpen} setIsOpen={setIsOpen} />
                 <ModalButton label={"Nous contacter"} className="btn btn-accent hidden lg:inline-flex">
                     <ContactForm />

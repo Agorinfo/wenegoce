@@ -189,7 +189,7 @@ const ModuleSystem: React.FC<ModuleSystemProps> = ({modulesData, colors}) => {
                                                             className="pb-2 pt-2 border-b border-grayscale-lighter first:pt-0 last:border-0"
                                                             key={"detail-mobile" + detail.id}>
                                                             <h3 className={clsx("text-[1rem]", detail.detail && "pb-2")}>{detail.title}</h3>
-                                                            {detail &&
+                                                            {detail && detail.detail &&
                                                                 <BlocksRenderer
                                                                 content={detail.detail}
                                                             blocks={{
@@ -255,7 +255,7 @@ const ModuleSystem: React.FC<ModuleSystemProps> = ({modulesData, colors}) => {
                                         className="pb-2 pt-2 border-b border-grayscale-lighter first:pt-0 last:border-0"
                                         key={"detail-" + detail.id}>
                                         <h3 className={clsx("text-[1rem]", detail.detail && "pb-2")}>{detail.title}</h3>
-                                        {detail &&
+                                        {detail && detail.detail &&
                                             <BlocksRenderer
                                                 content={detail.detail}
                                                 blocks={{

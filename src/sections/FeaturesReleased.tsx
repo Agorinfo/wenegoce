@@ -34,10 +34,12 @@ const FeaturesReleased = ({data, image, colors}: FeatureReleasedProps) => {
             {data.map((item, index) => (
                 <FeatureReleased colors={colors} key={item.id} data={item} index={index}/>
             ))}
-            <img
-                src={image.data ? backUrl + image.data.attributes.url : emptyImg.src}
+            {image.data &&
+                <img
+                    src={image.data ? backUrl + image.data.attributes.url : emptyImg.src}
                 alt={image.data ? image.data.attributes.alternativeText : ""}
-            />
+                />
+            }
         </div>
     );
 };

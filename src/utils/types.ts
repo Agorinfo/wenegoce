@@ -125,6 +125,7 @@ export type ContentType = {
 export type CallToActionType = {
     title: string;
     text: string;
+    buttonLabel: string;
     headingClassName: string;
     buttonClassName: string;
 }
@@ -196,6 +197,7 @@ export type ReassuranceType = {
     };
     ctaTitle: string;
     ctaText: string;
+    ctaButtonLabel:string;
     ctaHeadingClassName: string;
     ctaButtonClassName: string;
 }

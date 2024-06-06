@@ -38,6 +38,7 @@ const ReassuranceHome = () => {
             url={url}
             ctaTitle={callToAction.title}
             ctaText={callToAction.text}
+            ctaButtonLabel={callToAction.labelButton}
             ctaHeadingClassName="text-accent"
             ctaButtonClassName="btn-accent"
         />

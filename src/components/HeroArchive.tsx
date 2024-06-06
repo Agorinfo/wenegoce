@@ -24,7 +24,7 @@ const HeroArchive = ({teaser, text, label, url, modules,}: HeroArchiveType) => {
     const [colors, setColors] = useState<{ base: string; hover: string; accent: string; muted: string; }>(initialColors)
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     const color = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.brandColor);
-    const background = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.heroArchive.background.data.attributes.url);
+    const background = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.heroArchive.background.data?.attributes.url);
 
     const [ref] = useKeenSlider<HTMLDivElement>({
         breakpoints: {

@@ -5,7 +5,7 @@ import Content from "@/components/Content";
 import {ReassuranceType} from "@/utils/types";
 import emptyImg from "@/assets/empty-img.png"
 
-const Reassurance = ({icon, alt, text, label, url, images, ctaTitle, ctaText, ctaHeadingClassName, ctaButtonClassName}: ReassuranceType) => {
+const Reassurance = ({icon, alt, text, label, url, images, ctaTitle, ctaText, ctaHeadingClassName, ctaButtonClassName, ctaButtonLabel}: ReassuranceType) => {
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     return (
         <>
@@ -35,6 +35,7 @@ const Reassurance = ({icon, alt, text, label, url, images, ctaTitle, ctaText, ct
                 text={ctaText}
                 headingClassName={ctaHeadingClassName}
                 buttonClassName={ctaButtonClassName}
+                buttonLabel={ctaButtonLabel}
             />
         </>
     );

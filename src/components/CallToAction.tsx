@@ -3,21 +3,20 @@ import React, {useState} from 'react';
 import Button, {ModalButton} from "@/components/Button";
 import {CallToActionPageType, CallToActionType} from "@/utils/types";
 import ContactForm from "@/components/ContactForm";
-import Modal from "@/components/Modal";
 import clsx from "clsx";
 import emptyImg from "@/assets/empty-img.png"
 import toast from "react-hot-toast";
 
-const CallToAction = ({title, text, headingClassName, buttonClassName}: CallToActionType) => {
+const CallToAction = ({title, text, headingClassName, buttonClassName, buttonLabel}: CallToActionType) => {
     return (
         <section className="bg-gradient-to-b from-accent-shadow from-50% to-white to-50% py-12 full-width -mt-px">
             <div
-                className="flex flex-col lg:flex-row items-center justify-between w-full bg-grayscale-lighter p-8 rounded-lg">
+                className="flex flex-col lg:flex-row items-center justify-between w-full bg-grayscale-lighter p-8 rounded-lg lg:gap-12">
                 <div className="lg:w-3/5 2xl:w-auto pb-6 lg:pb-0">
                     <h3 className={"text-h3 font-bold pb-2 " + headingClassName}>{title}</h3>
                     <p className="paragraph">{text}</p>
                 </div>
-                <ModalButton label="Être recontacter par un conseiller" className={"btn " + buttonClassName}>
+                <ModalButton label={buttonLabel} className={"btn min-w-fit " + buttonClassName}>
                     <ContactForm/>
                 </ModalButton>
             </div>

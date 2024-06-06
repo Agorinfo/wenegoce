@@ -18,27 +18,27 @@ export const generateMetadata = async (): Promise<Metadata> => {
     const metas = about.metas
 
     return {
-        metadataBase: new URL(FRONT_URL + "/" + about.slug),
-        title: metas.meta_title || "Agorinfo, éditeur de solution logicielles métier",
-        description: metas?.meta_description || "Solutions logicielles de gestion : logiviande, SILOS , LSA et Comptinnov. Découvrez nos services, conseils, formations pour votre solution logiciele de gestion.",
+        metadataBase: new URL(FRONT_URL + "/qui-sommes-nous"),
+        title: metas.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+        description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
         openGraph: {
-            title: metas?.meta_title || "Agorinfo, éditeur de solution logicielles métier",
-            siteName: metas?.meta_title || "Agorinfo, éditeur de solution logicielles métier",
-            description: metas?.meta_description || "Solutions logicielles de gestion : logiviande, SILOS , LSA et Comptinnov. Découvrez nos services, conseils, formations pour votre solution logiciele de gestion.",
-            url: metas.canonicalUrl,
+            title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+            siteName: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
+            url: FRONT_URL + "/qui-sommes-nous",
             images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
         },
         twitter: {
             card: 'summary_large_image',
-            site: metas.canonicalUrl,
-            title: metas?.meta_title || "Agorinfo, éditeur de solution logicielles métier",
-            description: metas?.meta_description || "Solutions logicielles de gestion : logiviande, SILOS , LSA et Comptinnov. Découvrez nos services, conseils, formations pour votre solution logiciele de gestion.",
-            images: [`${BACK_URL}${metas.shareImage.data?.attributes.url}` || ""],
+            site: FRONT_URL + "/qui-sommes-nous",
+            title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
+            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
         },
         icons: {
-            icon: `${BACK_URL}${global?.favicon.data?.attributes.url}`,
-            apple: `${BACK_URL}${global?.favicon.data?.attributes.url}`,
-            shortcut: `${BACK_URL}${global?.favicon.data?.attributes.url}`
+            icon: `${BACK_URL}${global?.favicon.data.attributes.url}`,
+            apple: `${BACK_URL}${global?.favicon.data.attributes.url}`,
+            shortcut: `${BACK_URL}${global?.favicon.data.attributes.url}`
         }
     }
 };

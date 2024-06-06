@@ -5,27 +5,27 @@ import getRgpd from "@/actions/getRgpd";
 import RichText from "@/components/RichText";
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const {BACK_URL} = process.env;
+    const {BACK_URL,FRONT_URL} = process.env;
     const rgpd = await getRgpd();
     const global = await getGlobal();
     const metas = rgpd.metas
 
     return {
-        metadataBase: new URL(metas.canonicalUrl),
-        title: metas.meta_title || "Agorinfo, éditeur de solution logicielles métier",
-        description: metas?.meta_description || "Solutions logicielles de gestion : logiviande, SILOS , LSA et Comptinnov. Découvrez nos services, conseils, formations pour votre solution logiciele de gestion.",
+        metadataBase: new URL(FRONT_URL + "/rgpd"),
+        title: metas.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+        description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
         openGraph: {
-            title: metas?.meta_title || "Agorinfo, éditeur de solution logicielles métier",
-            siteName: metas?.meta_title || "Agorinfo, éditeur de solution logicielles métier",
-            description: metas?.meta_description || "Solutions logicielles de gestion : logiviande, SILOS , LSA et Comptinnov. Découvrez nos services, conseils, formations pour votre solution logiciele de gestion.",
-            url: metas.canonicalUrl,
+            title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+            siteName: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
+            url: FRONT_URL + "/rgpd",
             images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
         },
         twitter: {
             card: 'summary_large_image',
-            site: metas.canonicalUrl,
-            title: metas?.meta_title || "Agorinfo, éditeur de solution logicielles métier",
-            description: metas?.meta_description || "Solutions logicielles de gestion : logiviande, SILOS , LSA et Comptinnov. Découvrez nos services, conseils, formations pour votre solution logiciele de gestion.",
+            site: FRONT_URL + "/rgpd",
+            title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
             images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
         },
         icons: {

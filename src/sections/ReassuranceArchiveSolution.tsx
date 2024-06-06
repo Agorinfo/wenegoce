@@ -27,6 +27,7 @@ const ReassuranceArchiveSolution = () => {
             ctaText={data.archiveSolutions.cta.text}
             ctaHeadingClassName="text-accent"
             ctaButtonClassName="btn-accent"
+            ctaButtonLabel={data.archiveServices.cta.labelButton}
         />
     );
 };

@@ -80,7 +80,7 @@ const ModuleSystem: React.FC<ModuleSystemProps> = ({modulesData, colors}) => {
                         <CaretDown size={16}/>
                     </button>
                     <div
-                        className={`absolute bg-white top-[54px] w-fit flex flex-col lg:flex-row justify-start rounded-lg border overflow-clip lg:static lg:mb-12 divide-x transition-all duration-300 ease-linear
+                        className={`absolute bg-white top-[54px] w-fit flex flex-col lg:flex-row justify-start rounded-lg border overflow-hidden lg:static lg:mb-12 divide-x transition-all duration-300 ease-linear
                         ${open ? "visible opacity-100 scale-100" : "invisible opacity-0 scale-90 lg:scale-100 lg:opacity-100 lg:visible"}`}
                         role="tablist"
                         aria-label="Liste des modules"
@@ -161,6 +161,7 @@ const ModuleSystem: React.FC<ModuleSystemProps> = ({modulesData, colors}) => {
                                                     key={`tag-${activeFeature.id}`}
                                                     className="flex flex-wrap items-center gap-4 pb-8"
                                                 >
+                                                    <h3>{activeModule?.attributes.name}</h3>
                                                     {activeFeature.attributes.activities.data.map((activity: ActivitiesType) => (
                                                         <span
                                                             key={"activity-mobile-" + activity?.id}
@@ -194,7 +195,9 @@ const ModuleSystem: React.FC<ModuleSystemProps> = ({modulesData, colors}) => {
                                                                 content={detail.detail}
                                                             blocks={{
                                                                 paragraph: ({children}) =>
-                                                                    <p className="text-[1rem] text-grayscale-darkest pl-4 border-l border-accent whitespace-pre-line">{children}</p>
+                                                                    <p className="text-[1rem] text-grayscale-darkest pl-4 border-l border-accent whitespace-pre-line">{children}</p>,
+                                                                "list-item": ({children}) =>
+                                                                    <ul className="list-disc list-inside pb-12 pl-4 border-l whitespace-pre-line border-accent">{children}</ul>,
                                                             }}
                                                         />
                                                             }

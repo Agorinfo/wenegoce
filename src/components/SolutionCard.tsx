@@ -6,7 +6,7 @@ const SolutionCard = ({url, image, alt, category, solution}: SolutionCardType) =
     return (
         <div>
             <a href={url}
-               className="group mb-2 block h-96 overflow-clip rounded-lg bg-gray-100 shadow-lg lg:mb-3">
+               className="group mb-2 block h-96 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
                 <img
                     src={image}
                     loading="lazy" alt={alt}

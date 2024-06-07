@@ -126,7 +126,7 @@ const Slider = ({images, logo}: ImagesTypes) => {
                     }
                 </div>
                 <button
-                    className={clsx("absolute top-1/2 left-0 -translate-y-1/2 z-40 size-12 text-featured",
+                    className={clsx("absolute top-1/2 left-0 -translate-y-1/2 z-40 size-12 text-featured-muted",
                         index === 0 && "hidden",
                         !images && "hidden"
                     )}
@@ -135,7 +135,7 @@ const Slider = ({images, logo}: ImagesTypes) => {
                     <ArrowLeft size={48}/>
                 </button>
                 <button
-                    className={clsx("absolute top-1/2 right-0 -translate-y-1/2 z-40 size-12 text-featured",
+                    className={clsx("absolute top-1/2 right-0 -translate-y-1/2 z-40 size-12 text-featured-muted",
                         index === images?.length - 1 && "hidden",
                         !images && "hidden"
                     )}

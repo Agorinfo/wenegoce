@@ -89,7 +89,7 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
                             }
                             {item.subNavItems.length > 0 &&
                                 <div
-                                    className={clsx("w-full max-w-screen-xl overflow-clip transition-all duration-700 ease-[cubic-bezier(0.68,-0.55,0,2.61)] lg:absolute lg:z-50 lg:left-0 lg:bg-featured-shine lg:border lg:border-greyscale-lighter lg:shadow-subNav lg:rounded-lg lg:px-[8.333vw]",
+                                    className={clsx("w-full max-w-screen-xl overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.68,-0.55,0,2.61)] lg:absolute lg:z-50 lg:left-0 lg:bg-featured-shine lg:border lg:border-greyscale-lighter lg:shadow-subNav lg:rounded-lg lg:px-[8.333vw]",
                                         openSubNav === index ? "max-h-[2000px] lg:visible opacity-100 lg:top-[110%]" : "lg:invisible opacity-0 max-h-0 lg:top-[90%]"
                                     )}>
                                     <div
@@ -107,7 +107,7 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
                                                 />
                                             ))}
                                         </div>
-                                        <div className="bg-white rounded-lg overflow-clip flex flex-col">
+                                        <div className="bg-white rounded-lg overflow-hidden flex flex-col">
                                             <img className="hidden flex-auto object-cover lg:block"
                                                  src={item.image.data? backUrl + item.image.data.attributes.url : emptyImg.src}
                                                  alt={item.image.data ? item.image.data.attributes.alternativeText : ""}/>

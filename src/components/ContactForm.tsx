@@ -58,7 +58,7 @@ const ContactForm = () => {
         <div className="flex flex-col lg:flex-row bg-white">
             <h2 className="text-h3 font-bold capitalize pt-8 px-8 pb-6 lg:hidden">Contacter <span className="text-[#3965bd] font-bold">We</span><span className='font-light text-[#646464]'>Négoce</span></h2>
             <div className="lg:hidden px-8 flex">
-                <div className="flex justify-start items-start gap-1 rounded-lg border overflow-clip">
+                <div className="flex justify-start items-start gap-1 rounded-lg border overflow-hidden">
                     <button
                         onClick={() => setActive('formulaire')}
                         className={`px-4 py-3 w-[9.25rem] ${active === "formulaire" ? "text-accent bg-accent-shine" : "text-grayscale-darker"}`}

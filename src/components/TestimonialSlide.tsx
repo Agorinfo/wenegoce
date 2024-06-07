@@ -24,7 +24,7 @@ const TestimonialSlide = ({testimonials}: TestimonialFetchType) => {
 
     return (
         <>
-            <div className="relative flex overflow-clip px-12">
+            <div className="relative flex overflow-hidden px-12">
                 <div ref={sliderRef} className="keen-slider">
                     {testimonials.map(item => (
                         <div key={item.id} className="keen-slider__slide">

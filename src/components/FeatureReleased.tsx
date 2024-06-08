@@ -70,7 +70,7 @@ const LastFeatureReleased = ({
             className="relative pl-[2.75rem]"
         >
             <span style={versionStyle}
-                  className="absolute left-[-1.75rem] top-0 w-14 inline-flex items-center justify-center py-2 rounded-lg leading-[137.5%]">{version}</span>
+                  className="absolute left-[-7.5%] top-0 px-2 inline-flex items-center justify-center py-2 rounded-lg leading-[137.5%]">{version}</span>
             <span className="flex items-center justify-between flex-auto">
                     <h3 className="text-h5 font-semibold">{title}</h3>
                     <CaretUp

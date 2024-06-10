@@ -120,7 +120,7 @@ export const CallToActionImage = ({
     return (
         <section className={clsx(`py-6 sm:py-8 lg:py-12`, color === "bleu" && "text-white")}>
             <div
-                className={clsx("grid sm:grid-cols-2 lg:grid-cols-5 w-full rounded-lg overflow-hidden md:h-80", color === "gris" && "border border-grayscale-medium")}>
+                className={clsx("grid sm:grid-cols-2 lg:grid-cols-5 w-full rounded-lg overflow-hidden max-h-[25rem]", color === "gris" && "border border-grayscale-medium")}>
                 <div className={clsx("flex flex-col items-start p-8",
                     position === 'image à droite' && "lg:col-span-2",
                     position === 'image à gauche' && "order-1 lg:col-span-3",
@@ -151,7 +151,7 @@ export const CallToActionImage = ({
                         />
                     }
                 </div>
-                <div className={clsx("h-48 sm:h-auto md:h-80 w-full object-cover",
+                <div className={clsx("h-48 sm:h-auto max-h-[25rem] w-full object-cover",
                     position === 'image à droite' && "lg:col-span-3",
                     position === 'image à gauche' && "lg:col-span-2"
                 )}

@@ -17,15 +17,17 @@ const TestimonialCard = ({
     return (
         <div className="py-12">
             <img className="mx-auto max-w-32" src={logo ? logo : emptyImg.src} alt={alt}/>
-            <BlocksRenderer
-                content={testimonial}
-                blocks={{
-                    paragraph: ({children}) => <p
-                        className="py-16 text-center max-w-[28rem] mx-auto">{children}</p>,
-                }}
-            />
+            {testimonial &&
+                <BlocksRenderer
+                    content={testimonial}
+                    blocks={{
+                        paragraph: ({children}) => <p
+                            className="py-16 text-center max-w-[28rem] mx-auto">{children}</p>,
+                    }}
+                />}
             <div className="flex items-center justify-center gap-3">
-                <img className="rounded-full size-14 object-cover" src={avatar ? avatar : emptyImg.src } alt={avatarAlt ? avatarAlt : ""}/>
+                <img className="rounded-full size-14 object-cover" src={avatar ? avatar : emptyImg.src}
+                     alt={avatarAlt ? avatarAlt : ""}/>
                 <div className="flex flex-col">
                     <span className="text-accent text-base font-bold capitalize">{firstname} {name}</span>
                     <span className="text-sm text-grayscale-darker capitalize">{job} / {company}</span>

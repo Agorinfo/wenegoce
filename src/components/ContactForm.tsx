@@ -4,41 +4,60 @@ import {useQuery} from "@tanstack/react-query";
 import getGlobal from "@/actions/getGlobal";
 import Loader from "@/components/Loader";
 import Button from "@/components/Button";
-import send from "@/actions/SendEmail";
 import emptyImg from "@/assets/empty-img.png"
+import toast from "react-hot-toast";
 
 const ContactForm = () => {
     const url = process.env.NEXT_PUBLIC_FRONT_URL;
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     const [active, setActive] = useState("formulaire");
-    const [contact, setContact] = useState({
-        firstname: "",
-        name: "",
-        company:"",
-        email: "",
-        tel: "",
-        object: "",
-        message: ""
-    });
+    // const [contact, setContact] = useState({
+    //     firstname: "",
+    //     name: "",
+    //     company:"",
+    //     email: "",
+    //     tel: "",
+    //     object: "",
+    //     message: ""
+    // });
+    //
+    // const handleChange = (e: any) => {
+    //     const {name, value, type, checked} = e.target;
+    //     setContact({
+    //         ...contact,
+    //         [name]: type === 'checkbox' ? checked : value,
+    //     });
+    // };
+    //
+    // const options = {
+    //     method: 'POST',
+    //     body: JSON.stringify(contact)
+    // };
 
-    const handleChange = (e: any) => {
-        const {name, value, type, checked} = e.target;
-        setContact({
-            ...contact,
-            [name]: type === 'checkbox' ? checked : value,
-        });
+    async function handleSubmit(event: any) {
+
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        try {
+
+            const response = await fetch('/api/send-contact', {
+                method: 'post',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                console.log("falling over")
+                throw new Error(`response status: ${response.status}`);
+            }
+            const responseData = await response.json();
+            console.log(responseData['message'])
+
+            toast.success("Message envoyé !");
+        } catch (err) {
+            console.error(err);
+            alert("Error, please try resubmitting the form");
+        }
     };
-
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(contact)
-    };
-
-     const handleSubmit = (e: any) => {
-         send("Test Mail", `
-        <h1>Hello World</h1>
-    `)
-     }
 
     const {data, isLoading, error} = useQuery({
         queryKey: ["global"],
@@ -109,16 +128,14 @@ const ContactForm = () => {
             </div>
             <div className={`p-8 lg:w-[50vw] max-w-[48rem] ${active === "formulaire" ? "block" : "hidden lg:block"}`}>
                 <h2 className="text-h3 font-bold capitalize pb-6 hidden lg:block">Contacter <span className="text-[#3965bd] font-bold">We</span><span className='font-light text-[#646464]'>Négoce</span></h2>
-                <form className="grid sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-4">
                     <label className="label-style" htmlFor="firstname">
                         Prénom *
                         <input
                             type="text"
                             name="firstname"
                             id="firstname"
-                            value={contact.firstname}
                             className="input-style"
-                            onChange={handleChange}
                             required
                         />
                     </label>
@@ -128,9 +145,7 @@ const ContactForm = () => {
                             type="text"
                             name="name"
                             id="name"
-                            value={contact.name}
                             className="input-style"
-                            onChange={handleChange}
                             required
                         />
                     </label>
@@ -140,9 +155,7 @@ const ContactForm = () => {
                             type="text"
                             name="company"
                             id="company"
-                            value={contact.company}
                             className="input-style"
-                            onChange={handleChange}
                         />
                     </label>
                     <label className="label-style" htmlFor="email">
@@ -151,9 +164,7 @@ const ContactForm = () => {
                             type="email"
                             name="email"
                             id="email"
-                            value={contact.email}
                             className="input-style"
-                            onChange={handleChange}
                             required
                         />
                     </label>
@@ -163,9 +174,7 @@ const ContactForm = () => {
                             type="tel"
                             name="tel"
                             id="tel"
-                            value={contact.tel}
                             className="input-style"
-                            onChange={handleChange}
                             required
                         />
                     </label>
@@ -176,11 +185,10 @@ const ContactForm = () => {
                                 <input
                                     type="radio"
                                     id="contact"
-                                    name="civility"
+                                    name="object"
                                     value="Être recontacté"
                                     className="radio-style"
                                     defaultChecked
-                                    onChange={handleChange}
                                 />
                                 Être recontacté
                             </label>
@@ -188,10 +196,9 @@ const ContactForm = () => {
                                 <input
                                     type="radio"
                                     id="demo"
-                                    name="civility"
+                                    name="object"
                                     value="Réserver une démo"
                                     className="radio-style"
-                                    onChange={handleChange}
                                 />
                                 Réserver une démo
                             </label>
@@ -199,10 +206,9 @@ const ContactForm = () => {
                                 <input
                                     type="radio"
                                     id="other"
-                                    name="civility"
+                                    name="object"
                                     value="Autre demande"
                                     className="radio-style"
-                                    onChange={handleChange}
                                 />
                                 Autre demande
                             </label>
@@ -214,14 +220,12 @@ const ContactForm = () => {
                             className="input-style resize-none h-32"
                             name="message"
                             id="message"
-                            value={contact.message}
-                            onChange={handleChange}
                             required
                         >
                             </textarea>
                     </label>
                     <div className="flex items-center justify-between col-span-full">
-                        <button className="btn btn-accent mb-4" type={"submit"} formAction={handleSubmit}>Envoyer</button>
+                        <button className="btn btn-accent mb-4" type={"submit"} >Envoyer</button>
                         <span className={"text-sm text-grayscale-darker"}>* Obligatoire</span>
                     </div>
                     <p className="text-sm text-grayscale-darker col-span-full">En envoyant ce message, vous acceptez

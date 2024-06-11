@@ -16,16 +16,13 @@ export async function POST(request) {
     const tel = formData.get('tel');
     const object = formData.get('object');
     const message = formData.get('message');
-
+    console.log(formData);
     const transporter = nodemailer.createTransport({
         service: 'gmail',
-        // host: SMTP_HOST,
-        // port: SMTP_PORT,
-        // protocol: SMTP_PROTOCOLE,
         secure: true,
         auth: {
-            user: "agorinfo@agorinfo.fr",
-            pass: "6zbzV057#8Gug6t83^"
+            user: SMTP_EMAIL,
+            pass: "bjda wnbf nvcq msue"
         },
     });
 
@@ -40,7 +37,7 @@ export async function POST(request) {
 
         const mail = await transporter.sendMail({
             from: SMTP_EMAIL,
-            to: "drfyah@gmail.com", //pour la vérification, renseigner l'email du formulaire
+            to: "j.matha@wesoft.fr",
             replyTo: email,
             subject: `Demande en provenance de votre site, de: ${firstname} ${name} `,
             html: `

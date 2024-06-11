@@ -66,19 +66,20 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
                             {item.subNavItems.length > 0 ?
                                 <>
                                     <button
-                                        onClick={() => setOpenSubNav(openSubNav === index ? undefined : index )}
+                                        onClick={() => setOpenSubNav(openSubNav === index ? undefined : index)}
                                         className=" hidden lg:inline-flex items-center gap-1 pb-6 lg:pb-0 font-bold hover:text-accent transition-color duration-300 ease-linear">{item.label}
                                         <Icon name={"down"}/>
                                     </button>
-                                    <div className="flex items-center gap-1 lg:hidden pb-6">
+                                    {item.url && item.label && <div className="flex items-center gap-1 lg:hidden pb-6">
                                         <Link onClick={() => setIsOpen(false)}
                                               href={item.url}
                                               className={clsx("font-bold hover:text-accent transition-color duration-300 ease-linear", isOpen && "text-accent")}>{item.label}
                                         </Link>
                                         <Icon size={32} name={"down"}/>
-                                    </div>
+                                    </div>}
                                 </>
                                 :
+                                item.url && item.label &&
                                 <Link onClick={() => {
                                     setIsOpen(false);
                                     setOpenSubNav(undefined);
@@ -109,19 +110,21 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
                                         </div>
                                         <div className="bg-white rounded-lg overflow-hidden flex flex-col">
                                             <img className="hidden flex-auto object-cover lg:block"
-                                                 src={item.image.data? backUrl + item.image.data.attributes.url : emptyImg.src}
+                                                 src={item.image.data ? backUrl + item.image.data.attributes.url : emptyImg.src}
                                                  alt={item.image.data ? item.image.data.attributes.alternativeText : ""}/>
-                                            <div className="pb-6 lg:p-3 text-center">
-                                                <Link
-                                                    onClick={() => {
-                                                        setIsOpen(false);
-                                                        setOpenSubNav(undefined);
-                                                    }}
-                                                    className="btn btn-gray w-full lg:w-auto lg:btn-small lg:btn-small-minor"
-                                                    href={item.url}>
-                                                    {item.labelButton}
-                                                </Link>
-                                            </div>
+                                            {item.url && item.labelButton &&
+                                                <div className="pb-6 lg:p-3 text-center">
+                                                    <Link
+                                                        onClick={() => {
+                                                            setIsOpen(false);
+                                                            setOpenSubNav(undefined);
+                                                        }}
+                                                        className="btn btn-gray w-full lg:w-auto lg:btn-small lg:btn-small-minor"
+                                                        href={item?.url}>
+                                                        {item?.labelButton}
+                                                    </Link>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>

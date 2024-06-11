@@ -54,7 +54,7 @@ const HeroService = ({icon, title, teaser, heroImg, steps, stepImg, logo}: HeroS
                 <div className="lg:pt-28 pb-12 grid md:grid-cols-2 gap-8 md:gap-0 lg:flex-row justify-between">
                     <div className="bg-featured-shine">
                         <div id="service-title" className="">
-                            <h1 className="text-h1 flex items-center gap-8">
+                            <h1 className="text-h1 flex items-center gap-8 pb-8">
                                 <Icon className="text-featured" name={icon} size={56}/>
                                 {title}
                             </h1>

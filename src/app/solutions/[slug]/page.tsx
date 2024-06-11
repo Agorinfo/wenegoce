@@ -96,7 +96,8 @@ const Solution = async ({params}: {params : {slug: string}}) => {
                 colors={colors}
             />
             <ReassuranceSolution data={data[0].attributes.reassurance} colors={colors} />
-            <RelatedServices title="En complément" solutions={data[0].attributes.solutionComp.map((solution: any) => solution.solution)} />
+            {data[0].attributes.solutionComp.length && <RelatedServices title="En complément"
+                              solutions={data[0].attributes.solutionComp.map((solution: any) => solution.solution)}/>}
             <CallToActionNewsletter />
         </>
     );

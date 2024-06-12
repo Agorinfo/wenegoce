@@ -5,11 +5,13 @@ import HeroAbout from "@/sections/HeroAbout";
 import Expertises from "@/sections/Expertises";
 import Story from "@/sections/Story";
 import TestimonialsAbout from "@/sections/TestimonialsAbout";
-import {CallToActionNewsletter} from "@/components/CallToAction";
+import {CallToActionImage, CallToActionNewsletter} from "@/components/CallToAction";
 import Strengths from "@/sections/Strengths";
 import getHome from "@/actions/getHome";
 import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
+import CtaAbout from "@/sections/CtaAbout";
+import StepAbout from "@/sections/StepAbout";
 
 export const generateMetadata = async (): Promise<Metadata> => {
     const {BACK_URL,FRONT_URL} = process.env;
@@ -49,10 +51,10 @@ const About = async () => {
         queryKey: ["about"],
         queryFn: getAbout,
     })
-    await queryClient.prefetchQuery({
-        queryKey: ["home"],
-        queryFn: getHome,
-    })
+    // await queryClient.prefetchQuery({
+    //     queryKey: ["home"],
+    //     queryFn: getHome,
+    // })
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
@@ -60,7 +62,8 @@ const About = async () => {
             <Expertises />
             <Story />
             <TestimonialsAbout />
-            <Strengths />
+            <CtaAbout />
+            <StepAbout />
             <CallToActionNewsletter />
         </HydrationBoundary>
     );

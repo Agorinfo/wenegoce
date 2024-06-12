@@ -158,8 +158,8 @@ export const CallToActionImage = ({
                 >
                     <img
                         className="h-full w-full object-cover object-center"
-                        src={image.data ? backUrl + image.data.attributes.url : emptyImg.src}
-                        alt={image.data ? image.data.attributes.alternativeText : ""}
+                        src={image?.data ? backUrl + image.data.attributes.url : emptyImg.src}
+                        alt={image?.data ? image.data.attributes.alternativeText : ""}
                     />
                 </div>
             </div>

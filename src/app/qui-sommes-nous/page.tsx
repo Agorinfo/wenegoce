@@ -62,8 +62,8 @@ const About = async () => {
             <Expertises />
             <Story />
             <TestimonialsAbout />
-            <CtaAbout />
             <StepAbout />
+            <CtaAbout />
             <CallToActionNewsletter />
         </HydrationBoundary>
     );

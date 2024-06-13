@@ -12,7 +12,7 @@ import getGlobal from "@/actions/getGlobal";
 import getSolution from "@/actions/getSolution";
 import emptyImg from "@/assets/empty-img.png"
 
- async function getData(slug: string) {
+async function getData(slug: string) {
     const {API_URL, API_KEY} = process.env
     const res = await fetch(`${API_URL}/solutions?populate=brandImg,%20heroArchive.logo,%20heroArchive.informationCard.image,%20heroArchive.background,heroArchive.moduleList,%20reassurance.card,%20HeroPage.images,%20HeroPage.logo,%20HeroPage.content,%20cta,%20FeaturesReleased.details,%20featuresReleasedImg,%20newsletter,features,modules.features.activities,modules.features.details,%20modules.features.activities,%20solutionComp&filters%5Bslug%5D%5B%24eq%5D=${slug}`, {
         cache: 'no-store',
@@ -28,8 +28,8 @@ import emptyImg from "@/assets/empty-img.png"
     return res.json().then(res => res.data);
 }
 
-export const generateMetadata = async ({params}: {params : {slug: string}}): Promise<Metadata> => {
-    const {BACK_URL,FRONT_URL} = process.env;
+export const generateMetadata = async ({params}: { params: { slug: string } }): Promise<Metadata> => {
+    const {BACK_URL, FRONT_URL} = process.env;
     const solution = await getSolution(params.slug)
     const global = await getGlobal();
     const metas = solution[0].attributes.metas
@@ -60,7 +60,7 @@ export const generateMetadata = async ({params}: {params : {slug: string}}): Pro
     }
 };
 
-const Solution = async ({params}: {params : {slug: string}}) => {
+const Solution = async ({params}: { params: { slug: string } }) => {
     const data = await getData(params.slug);
     const colors = createColorPalette(data[0].attributes.brandColor);
 
@@ -95,10 +95,15 @@ const Solution = async ({params}: {params : {slug: string}}) => {
                 image={data[0].attributes.featuresReleasedImg}
                 colors={colors}
             />
-            <ReassuranceSolution data={data[0].attributes.reassurance} colors={colors} />
-            {data[0].attributes.solutionComp.length && <RelatedServices title="En complément"
-                              solutions={data[0].attributes.solutionComp.map((solution: any) => solution.solution)}/>}
-            <CallToActionNewsletter />
+            <ReassuranceSolution data={data[0].attributes.reassurance} colors={colors}/>
+            {data[0].attributes.solutionComp.length ?
+                <RelatedServices
+                    title="En complément"
+                    solutions={data[0].attributes.solutionComp.map((solution: any) => solution.solution)}/>
+                :
+                null
+            }
+            <CallToActionNewsletter/>
         </>
     );
 };

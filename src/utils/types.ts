@@ -192,6 +192,11 @@ export type ReassuranceType = {
                     {
                         url: string;
                         alternativeText: string;
+                        formats: {
+                            small: {
+                                url: string;
+                            }
+                        }
                     };
             }[];
     };
@@ -230,6 +235,11 @@ export type HeroPageType = {
                     {
                         url: string;
                         alternativeText: string;
+                        formats: {
+                            small: {
+                                url: string;
+                            }
+                        }
                     };
             }[];
     };

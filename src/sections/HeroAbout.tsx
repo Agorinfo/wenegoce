@@ -16,8 +16,6 @@ const HeroAbout = () => {
 
     if (error) return <p>{error.message}</p>;
 
-    console.log(data);
-
     return (
         <>
             <Hero

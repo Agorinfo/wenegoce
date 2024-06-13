@@ -10,7 +10,7 @@ import curveTablet from "@/assets/about-curve-tablet.png";
 
 const Hero = ({images, teaser, content, label1, url1, label2, url2}: HeroHomeType) => {
     const screen = useScreenSize();
-    console.log(images)
+
     return (
         <>
             <div className="bg-featured-shine py-12 full-width h-hero">

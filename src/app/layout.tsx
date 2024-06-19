@@ -34,9 +34,6 @@ export default async function RootLayout({
     })
     return (
         <html lang="fr" className="scroll-smooth">
-        <head>
-            <meta name="robots" content="noindex, follow" />
-        </head>
         <body className={`${openSans.className} overflow-x-hidden`}>
         <UseReactQuery>
             <HydrationBoundary state={dehydrate(queryClient)}>

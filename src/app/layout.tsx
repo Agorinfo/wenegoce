@@ -11,6 +11,7 @@ import Footer from "@/sections/Footer";
 import getFooter from "@/actions/getFooter";
 import {Toaster} from "react-hot-toast";
 import Modal from "@/components/Modal";
+import CookieConsent from "@/components/CookieConsent";
 
 const openSans = Open_Sans({subsets: ["latin"]});
 
@@ -35,10 +36,11 @@ export default async function RootLayout({
     return (
         <html lang="fr" className="scroll-smooth">
         <body className={`${openSans.className} overflow-x-hidden`}>
+        <CookieConsent />
         <UseReactQuery>
             <HydrationBoundary state={dehydrate(queryClient)}>
                 <div id="modal-root"></div>
-                <Modal />
+                <Modal/>
                 <Toaster
                     position="top-center"
                     reverseOrder={false}

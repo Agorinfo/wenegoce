@@ -16,6 +16,7 @@
     "@tanstack/react-query-devtools": "^5.28.6",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.27",
+    "js-cookie": "^3.0.5",
     "keen-slider": "^6.8.6",
     "next": "14.1.4",
     "nodemailer": "^6.9.13",
@@ -26,6 +27,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.15",
     "@types/react": "^18",

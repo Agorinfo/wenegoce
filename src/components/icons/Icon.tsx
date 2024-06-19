@@ -1,28 +1,28 @@
 import React from 'react';
 import {
+    AddressBook, Alarm, AppleLogo, Archive, ArrowClockwise,
     ArrowLeft,
     ArrowRight,
     BookmarkSimple,
     Browsers,
     Buildings,
-    Calculator,
+    Calculator, CalendarCheck,
     CaretDown,
     CaretUp,
     Certificate,
-    ChalkboardTeacher,
+    ChalkboardTeacher, ChartPie,
     ChatsTeardrop,
-    ChatTeardrop,
     Check,
-    CheckCircle,
-    ComputerTower,
+    CheckCircle, Cloud, CloudArrowDown, CloudArrowUp, CloudCheck, Code,
+    ComputerTower, CurrencyEur,
     Database,
-    DesktopTower, Devices,
-    Factory,
+    DesktopTower, DeviceMobile, Devices, DeviceTablet, DeviceTabletCamera, Envelope, Export,
+    Factory, File, FileCloud, FileCode, Flag, FolderOpen, FolderSimple,
     Gear,
     Grains,
     Handshake,
     HardDrives,
-    Headset,
+    Headset, IdentificationBadge,
     InstagramLogo,
     Knife,
     Leaf,
@@ -34,8 +34,8 @@ import {
     NumberOne,
     NumberThree,
     NumberTwo,
-    Planet,
-    Signpost,
+    Planet, ShoppingCart,
+    Signpost, Star,
     Storefront,
     TwitterLogo,
     User,
@@ -262,6 +262,96 @@ const Icon = ({name, size, className}:{name: string, size?: number, className?: 
             break
         case "versioning":
             icon = <Versioning />
+            break
+        case "address book":
+            icon = <AddressBook className={className} size={size} />
+            break
+        case "alarm":
+            icon = <Alarm className={className} size={size} />
+            break
+        case "apple":
+            icon = <AppleLogo className={className} size={size} />
+            break
+        case "archive":
+            icon = <Archive className={className} size={size} />
+            break
+        case "arrow clockwise":
+            icon = <ArrowClockwise className={className} size={size} />
+            break
+        case "calendar":
+            icon = <CalendarCheck className={className} size={size} />
+            break
+        case "chart bar":
+            icon = <ArrowClockwise className={className} size={size} />
+            break
+        case "chart pie":
+            icon = <ChartPie className={className} size={size} />
+            break
+        case "cloud":
+            icon = <Cloud className={className} size={size} />
+            break
+        case "cloud arrow down":
+            icon = <CloudArrowDown className={className} size={size} />
+            break
+        case "cloud arrow up":
+            icon = <CloudArrowUp className={className} size={size} />
+            break
+        case "cloud check":
+            icon = <CloudCheck className={className} size={size} />
+            break
+        case "code":
+            icon = <Code className={className} size={size} />
+            break
+        case "code":
+            icon = <Code className={className} size={size} />
+            break
+        case "euro":
+            icon = <CurrencyEur className={className} size={size} />
+            break
+        case "device mobile":
+            icon = <DeviceMobile className={className} size={size} />
+            break
+        case "device tablet":
+            icon = <DeviceTablet className={className} size={size} />
+            break
+        case "device tablet camera":
+            icon = <DeviceTabletCamera className={className} size={size} />
+            break
+        case "enveloppe":
+            icon = <Envelope className={className} size={size} />
+            break
+        case "export":
+            icon = <Export className={className} size={size} />
+            break
+        case "faders":
+            icon = <Export className={className} size={size} />
+            break
+        case "file":
+            icon = <File className={className} size={size} />
+            break
+        case "file cloud":
+            icon = <FileCloud className={className} size={size} />
+            break
+        case "file code":
+            icon = <FileCode className={className} size={size} />
+            break
+        case "flag":
+            icon = <Flag className={className} size={size} />
+            break
+        case "folder open":
+            icon = <FolderOpen className={className} size={size} />
+            break
+        case "folder simple":
+            icon = <FolderSimple className={className} size={size} />
+            break
+        case "identification badge":
+            icon = <IdentificationBadge className={className} size={size} />
+            break
+        case "shopping cart":
+            icon = <ShoppingCart className={className} size={size} />
+            break
+        case "star":
+            icon = <Star className={className} size={size} />
             break
         default:
             break;

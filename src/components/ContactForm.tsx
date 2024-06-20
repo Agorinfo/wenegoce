@@ -2,60 +2,46 @@
 import React, {useState} from 'react';
 import {useQuery} from "@tanstack/react-query";
 import getGlobal from "@/actions/getGlobal";
-import Loader from "@/components/Loader";
+import Loader, {LoaderButton} from "@/components/Loader";
 import Button from "@/components/Button";
 import emptyImg from "@/assets/empty-img.png"
 import toast from "react-hot-toast";
+import useModalStore from "@/store/ModalStore";
 
 const ContactForm = () => {
-    const url = process.env.NEXT_PUBLIC_FRONT_URL;
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     const [active, setActive] = useState("formulaire");
-    // const [contact, setContact] = useState({
-    //     firstname: "",
-    //     name: "",
-    //     company:"",
-    //     email: "",
-    //     tel: "",
-    //     object: "",
-    //     message: ""
-    // });
-    //
-    // const handleChange = (e: any) => {
-    //     const {name, value, type, checked} = e.target;
-    //     setContact({
-    //         ...contact,
-    //         [name]: type === 'checkbox' ? checked : value,
-    //     });
-    // };
-    //
-    // const options = {
-    //     method: 'POST',
-    //     body: JSON.stringify(contact)
-    // };
+    const { closeModal } = useModalStore();
+    const [loading, setLoading] = useState(false);
 
     async function handleSubmit(event: any) {
-
         event.preventDefault();
         const formData = new FormData(event.target);
         try {
-
+            setLoading(true);
             const response = await fetch('/api/send-contact', {
                 method: 'post',
                 body: formData,
             });
 
             if (!response.ok) {
-                console.log("falling over")
+                toast.error("Une erreur est survenue !");
                 throw new Error(`response status: ${response.status}`);
             }
-            const responseData = await response.json();
-            console.log(responseData['message'])
 
-            toast.success("Message envoyé !");
+            const responseData = await response.json();
+            if (responseData.status === 500) {
+                toast.error(responseData.message);
+            } else {
+                toast.success("Message envoyé !");
+                event.target.reset();
+                closeModal();
+            }
         } catch (err) {
+            toast.error("Une erreur est survenue !");
             console.error(err);
-            alert("Error, please try resubmitting the form");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -225,7 +211,7 @@ const ContactForm = () => {
                             </textarea>
                     </label>
                     <div className="flex items-center justify-between col-span-full">
-                        <button className="btn btn-accent mb-4" type={"submit"} >Envoyer</button>
+                        <button className="btn btn-accent mb-4" type={"submit"} >{loading ? <LoaderButton /> : "Envoyer"}</button>
                         <span className={"text-sm text-grayscale-darker"}>* Obligatoire</span>
                     </div>
                     <p className="text-sm text-grayscale-darker col-span-full">En envoyant ce message, vous acceptez

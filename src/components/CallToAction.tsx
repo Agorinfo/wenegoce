@@ -27,23 +27,37 @@ export default CallToAction;
 
 export const CallToActionNewsletter = () => {
     const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
+    async function handleSubmit(event: any) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
         try {
-            await fetch("/api/subscribe", {
-                method: "POST",
-                body: JSON.stringify({
-                    email: email
-                })
-            })
-            toast.success("Email bien enregistré !")
-            e.target.reset();
+            setLoading(true);
+            const response = await fetch('/api/subscribe', {
+                method: 'post',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                toast.error("Une erreur est survenue !");
+                throw new Error(`response status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            if (responseData.status === 500) {
+                toast.error(responseData.message);
+            } else {
+                toast.success("Inscription confirmée !");
+                event.target.reset();
+            }
         } catch (err) {
-            console.error(err)
-            toast.error('Une erreur est survenue, ressayez ultérieurement.')
+            toast.error("Une erreur est survenue !");
+            console.error(err);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
     return (
         <section className="pt-12 pb-24 full-width">

@@ -18,7 +18,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
     return {
         metadataBase: new URL(FRONT_URL + "/services"),
-        title: metas.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+        title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
         description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
         openGraph: {
             title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",

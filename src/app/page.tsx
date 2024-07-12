@@ -57,7 +57,7 @@ export default async function Home() {
             <Testimonials />
             <Solution />
             <ReassuranceHome />
-            <Strengths />
+            <Strengths /> 
             <Support />
             <CtaHome />
             </HydrationBoundary>

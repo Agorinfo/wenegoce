@@ -22,20 +22,15 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
             "(min-width: 400px)": {
                 slides: {perView: 3, spacing: 8},
             },
-            // "(min-width: 768px)": {
-            //     slides: {perView: 2, spacing: 32},
-            // },
-            // "(min-width: 1080px)": {
-            //     slides: {perView: 4, spacing: 32},
-            // },
-            // "(min-width: 1536px)": {
-            //     slides: {perView: 3, spacing: 32},
-            // },
+            "(min-width: 1080px)": {
+                slides: {perView: 4, spacing: 32},
+                vertical: true,
+            }
         },
         slides: {
             perView: 1,
             spacing: 32,
-        },
+        }
     })
 
     const bgStyle = {
@@ -179,13 +174,13 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
                         })
                     }
                 </motion.div>
-                <div className="hidden lg:grid gap-8">
-                    {modules.map(item => (
-                        <SidebarCard active={active} setActive={setActive} key={item.id}
-                                     service={item.attributes.slug}/>
-                    ))}
-                </div>
-                <div ref={ref} className="keen-slider !overflow-visible lg:!hidden">
+                {/*<div className="hidden lg:grid gap-8">*/}
+                {/*    {modules.map(item => (*/}
+                {/*        <SidebarCard active={active} setActive={setActive} key={item.id}*/}
+                {/*                     service={item.attributes.slug}/>*/}
+                {/*    ))}*/}
+                {/*</div>*/}
+                <div ref={ref} className="keen-slider max-h-[640px] lg:!w-[300px]">
                     {modules.map(item => (
                         <div key={item.id} className="keen-slider__slide !min-w-[7.5rem] rounded-2xl">
                             <SidebarCard

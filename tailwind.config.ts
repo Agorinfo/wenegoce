@@ -120,6 +120,7 @@ const config: Config = {
     },
     plugins: [
         require('@tailwindcss/forms'),
+        require('tailwind-scrollbar'),
         plugin(function ({addComponents, addVariant}: Config) {
             addComponents({
                 ".container": {

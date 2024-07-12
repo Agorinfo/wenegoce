@@ -67,15 +67,18 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
                                 <>
                                     <button
                                         onClick={() => setOpenSubNav(openSubNav === index ? undefined : index)}
-                                        className=" hidden lg:inline-flex items-center gap-1 pb-6 lg:pb-0 font-bold hover:text-accent transition-color duration-300 ease-linear">{item.label}
-                                        <Icon name={"down"}/>
+                                        className="hidden lg:inline-flex w-full items-center gap-1 pb-6 lg:pb-0 font-bold hover:text-accent transition-color duration-300 ease-linear">{item.label}
+                                        <Icon className="flex-auto justify-self-start" name={"down"}/>
                                     </button>
                                     {item.url && item.label && <div className="flex items-center gap-1 lg:hidden pb-6">
                                         <Link onClick={() => setIsOpen(false)}
                                               href={item.url}
                                               className={clsx("font-bold hover:text-accent transition-color duration-300 ease-linear", isOpen && "text-accent")}>{item.label}
                                         </Link>
-                                        <Icon size={32} name={"down"}/>
+                                        <button className="grow" onClick={() => setOpenSubNav(openSubNav === index ? undefined : index)}>
+                                            <Icon size={32} name={"down"} />
+                                        </button>
+
                                     </div>}
                                 </>
                                 :
@@ -84,7 +87,7 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
                                     setIsOpen(false);
                                     setOpenSubNav(undefined);
                                 }}
-                                      className="font-bold hover:text-accent transition-color duration-300 ease-linear"
+                                      className="font-bold hover:text-accent transition-color duration-300 ease-linear pb-6 lg:pb-0 inline-block w-full"
                                       href={item.url}>{item.label}
                                 </Link>
                             }

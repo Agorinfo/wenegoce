@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import Link from "next/link";
-import React from 'react';
+import React, { RefObject, forwardRef } from 'react';
 import Icon from "@/components/icons/Icon";
 import useModalStore from "@/store/ModalStore";
 
@@ -13,14 +13,14 @@ type ButtonType = {
     type?: "button" | "submit" | "reset" | undefined,
     onClick?: React.MouseEventHandler<HTMLButtonElement>,
     burger?: boolean,
-    icon?:string
-    ariaLabel?:string
-}
+    icon?: string,
+    ariaLabel?: string
+};
 
-const Button = ({url, label, onClick, className, type, burger, icon, ariaLabel}: ButtonType) => {
+const Button = ({ url, label, onClick, className, type, burger, icon, ariaLabel }: ButtonType) => {
     return (
         <>
-            {url && url?.startsWith('https') ?
+            {url && url.startsWith('https') ?
                 <a
                     className={className}
                     href={url}
@@ -51,37 +51,47 @@ const Button = ({url, label, onClick, className, type, burger, icon, ariaLabel}:
             }
         </>
     );
-}
+};
 
 export default Button;
 
 type OverlayType = {
     children: React.ReactNode,
     className?: string,
-    label?: string
-    labelClassName?: string;
-    iconName?: string;
-    style?: React.CSSProperties
-    onMouseEnter?: React.MouseEventHandler<HTMLButtonElement>
-    onMouseLeave?: React.MouseEventHandler<HTMLButtonElement>
-    onClick?: React.MouseEventHandler<HTMLButtonElement>
-    setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
-}
+    label?: string,
+    labelClassName?: string,
+    iconName?: string,
+    style?: React.CSSProperties,
+    onMouseEnter?: React.MouseEventHandler<HTMLButtonElement>,
+    onMouseLeave?: React.MouseEventHandler<HTMLButtonElement>,
+    onClick?: React.MouseEventHandler<HTMLButtonElement>,
+    setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>,
+};
 
-export const ModalButton = ({children, className, label, iconName, labelClassName, style, onMouseEnter, onMouseLeave, setIsOpen}: OverlayType) => {
-    const {openModal} = useModalStore();
+export const ModalButton = forwardRef<HTMLButtonElement, OverlayType>(({ children, className, label, iconName, labelClassName, style, onMouseEnter, onMouseLeave, setIsOpen }, ref) => {
+    const { openModal } = useModalStore();
 
     return (
         <>
-            <button onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={style} type="button" className={className} onClick={() => {
-                openModal(children);
-                {setIsOpen &&
-                    setIsOpen(false)
-                }
-            }}>
-                {iconName && <Icon name={iconName}/>}
+            <button
+                ref={ref}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                style={style}
+                type="button"
+                className={className}
+                onClick={() => {
+                    openModal(children);
+                    if (setIsOpen) {
+                        setIsOpen(false);
+                    }
+                }}
+            >
+                {iconName && <Icon name={iconName} />}
                 {label && <span className={labelClassName}>{label}</span>}
             </button>
         </>
-    )
-}
+    );
+});
+
+ModalButton.displayName = 'ModalButton';

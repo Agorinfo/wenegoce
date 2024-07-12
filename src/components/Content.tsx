@@ -1,11 +1,21 @@
-import React from 'react';
+"use client"
+import React, {useEffect, useRef} from 'react';
 import {BlocksRenderer} from "@strapi/blocks-react-renderer";
 import Button, {ModalButton} from "@/components/Button";
 import {ContentType} from "@/utils/types";
 import ContactForm from "@/components/ContactForm";
-import Modal from "@/components/Modal";
+import {useSearchParams} from "next/navigation";
 
 const Content = ({teaser, content, label1, label2, url1, url2, headingClassName, headingStyle, btn1ClassName, btn1Style, onMouseEnter, onMouseLeave}: ContentType) => {
+    const searchParams = useSearchParams();
+    const modalParam = searchParams.get('modal');
+    const modalButtonRef = useRef<HTMLButtonElement>(null);
+
+    useEffect(() => {
+        if (modalParam === 'true' && modalButtonRef.current) {
+            modalButtonRef.current.click();
+        }
+    }, [modalParam]);
 
     return (
         <div
@@ -64,6 +74,7 @@ const Content = ({teaser, content, label1, label2, url1, url2, headingClassName,
                 {url1 && url1 === "#" && label1 &&
                     <>
                         <ModalButton
+                            ref={modalButtonRef}
                             style={btn1Style}
                             label="Réserver une démo"
                             className={`btn ${btn1ClassName}`}
@@ -76,14 +87,18 @@ const Content = ({teaser, content, label1, label2, url1, url2, headingClassName,
 
                 }
                 {url1 && url1 !== "#" && label1 &&
-                    <Button url={url1} label={label1}
-                            className={`btn ${btn1ClassName}`}
+                    <Button
+                        url={url1}
+                        label={label1}
+                        className={`btn ${btn1ClassName}`}
                     />
                 }
 
                 {url2 && label2 &&
-                    <Button url={url2} label={label2}
-                            className="btn btn-gray"
+                    <Button
+                        url={url2}
+                        label={label2}
+                        className="btn btn-gray"
                     />
                 }
             </div>

@@ -16,7 +16,7 @@ import {
     CheckCircle, Cloud, CloudArrowDown, CloudArrowUp, CloudCheck, Code,
     ComputerTower, CurrencyEur,
     Database,
-    DesktopTower, DeviceMobile, Devices, DeviceTablet, DeviceTabletCamera, Envelope, Export,
+    DesktopTower, DeviceMobile, Devices, DeviceTablet, DeviceTabletCamera, Envelope, Export, FacebookLogo,
     Factory, File, FileCloud, FileCode, Flag, FolderOpen, FolderSimple,
     Gear,
     Grains,
@@ -181,6 +181,9 @@ const Icon = ({name, size, className}:{name: string, size?: number, className?: 
             break
         case "twitter":
             icon = <TwitterLogo className={className} weight="fill" size={size} />
+            break
+        case "facebook":
+            icon = <FacebookLogo className={className} weight="fill" size={size} />
             break
         case "linkedin":
             icon = <LinkedinLogo className={className} weight="fill" size={size} />

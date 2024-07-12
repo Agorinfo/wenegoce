@@ -7,7 +7,6 @@ import Loader from "@/components/Loader";
 import getFooter from "@/actions/getFooter";
 import emptyImg from "@/assets/empty-img.png"
 import ContactForm from "@/components/ContactForm";
-import Modal from "@/components/Modal";
 
 const Footer = ({}) => {
     const currenYear = new Date().getFullYear();
@@ -16,8 +15,6 @@ const Footer = ({}) => {
         queryKey: ["footer"],
         queryFn: getFooter,
     });
-
-    // const {title, text, label, url, image} = data;
 
     if (isLoading) return <Loader/>
 

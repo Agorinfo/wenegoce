@@ -95,7 +95,8 @@ const config: Config = {
                 h6: "1.125rem",
                 base: "clamp(0.9375rem, 0.925rem + 0.0625vw, 1rem)",
                 summary: "0.875rem",
-                badge: "0.75rem"
+                badge: "0.75rem",
+                button: "0.75rem",
             },
             boxShadow: {
                 nav: "0px 2px 48px 0px rgba(0, 0, 0, 0.04)",

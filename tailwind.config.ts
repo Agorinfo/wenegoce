@@ -21,14 +21,23 @@ const config: Config = {
         "border-comptinnov",
         "border-featured-shadow",
         "border-accent",
+        "border-accent-peps",
         "border-featured",
+        "border-featured-shadow",
         "hover:bg-logiviandeHover",
         "hover:bg-silosHover",
         "hover:bg-lsaHover",
         "hover:bg-comptinnovHover",
         "hover:bg-accent-shadow",
         "hover:bg-featured-shadow",
-        "hover:bg-featured"
+        "hover:bg-featured",
+        "hover:border-accent-peps",
+        "hover:border-featured-shadow",
+        "text-accent",
+        "text-accent-peps",
+        "text-accent-shine",
+        "text-featured",
+        "text-featured-shadow",
     ],
     theme: {
         screens: {
@@ -97,6 +106,7 @@ const config: Config = {
                 summary: "0.875rem",
                 badge: "0.75rem",
                 button: "0.75rem",
+                titleCard: "1.25rem",
             },
             boxShadow: {
                 nav: "0px 2px 48px 0px rgba(0, 0, 0, 0.04)",
@@ -115,7 +125,8 @@ const config: Config = {
                 check: 'url("/check.svg")',
             },
             backgroundImage: {
-                map: "linear-gradient(180deg, #EEF7FF 15.77%, rgba(220, 238, 255, 0.00) 100%)"
+                map: "linear-gradient(180deg, #EEF7FF 15.77%, rgba(220, 238, 255, 0.00) 100%)",
+                legend: "linear-gradient(180deg, rgba(24, 41, 10, 0.00) 62.91%, #18290A 100%)"
             },
         },
     },

@@ -48,18 +48,18 @@ const ContactForm = () => {
 
     const {data, isLoading, error} = useQuery({
         queryKey: ["global"],
-        queryFn: getGlobal
+        queryFn: () => getGlobal()
     })
 
     const footerData = useQuery({
         queryKey: ["footer"],
-        queryFn: getFooter,
+        queryFn: () => getFooter(),
     });
 
     const {siteName, street, adressComp, zipCode, city, tel, email, addressComp, portalUrl, logo} = data;
 
     const telUrl= tel.replaceAll(" ", "").substring(1);
-    const telCompUrl = addressComp.tel.replaceAll(" ", "").substring(1);
+    const telCompUrl = addressComp?.tel.replaceAll(" ", "").substring(1);
 
     if(isLoading || footerData.isLoading) return <Loader />
 
@@ -103,13 +103,13 @@ const ContactForm = () => {
                             <a className="link-normal" href={"mailto:" + email}>{email}</a>
                         </div>
                         <div className="flex flex-col gap-2 py-6">
-                            <h3 className="text-h6 font-bold">{addressComp.name}</h3>
+                            <h3 className="text-h6 font-bold">{addressComp?.name}</h3>
                             <div className="flex flex-col items-start">
-                                <span>{addressComp.address}</span>
-                                <span>{addressComp.zipCode} {addressComp.city}</span>
+                                <span>{addressComp?.address}</span>
+                                <span>{addressComp?.zipCode} {addressComp?.city}</span>
                             </div>
-                            <a className="link-normal" href={"tel:+33" + telCompUrl}>{addressComp.tel}</a>
-                            <a className="link-normal" href={"mailto:" + addressComp.email}>{addressComp.email}</a>
+                            <a className="link-normal" href={"tel:+33" + telCompUrl}>{addressComp?.tel}</a>
+                            <a className="link-normal" href={"mailto:" + addressComp?.email}>{addressComp?.email}</a>
                         </div>
                     </div>
                 </div>

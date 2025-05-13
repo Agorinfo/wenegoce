@@ -128,6 +128,7 @@ export type CallToActionType = {
     buttonLabel: string;
     headingClassName: string;
     buttonClassName: string;
+    noBg?: boolean;
 }
 export type CallToActionPageType = {
     title: string;
@@ -183,6 +184,34 @@ export type ReassuranceType = {
     icon: string;
     alt: string;
     text: BlocksContent;
+    label: string;
+    url: string;
+    images: {
+        data:
+            {
+                attributes:
+                    {
+                        url: string;
+                        alternativeText: string;
+                        formats: {
+                            small: {
+                                url: string;
+                            }
+                        }
+                    };
+            }[];
+    };
+    ctaTitle: string;
+    ctaText: string;
+    ctaButtonLabel: string;
+    ctaHeadingClassName: string;
+    ctaButtonClassName: string;
+}
+
+export type SectionFaqType = {
+    icon: string;
+    alt: string;
+    text: string;
     label: string;
     url: string;
     images: {

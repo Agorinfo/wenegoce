@@ -31,7 +31,7 @@ export const generateMetadata = async ({params}: {params : {slug: string}}): Pro
 
     return {
         metadataBase: new URL(FRONT_URL + "/" + params.slug),
-        title: metas.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+        title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
         description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
         openGraph: {
             title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",

@@ -17,7 +17,7 @@ const HeroRessources = () => {
     if(error) return <p>{ error?.message }</p>
 
     return (
-        <section className="bg-accent-shine full-width">
+        <section className="bg-accent-shine full-width h-hero">
             <div className="grid md:grid-cols-2 gap-[5.729vw] xl:gap-[3.5vw] py-28">
                 <div>
 

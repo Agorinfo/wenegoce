@@ -33,8 +33,8 @@ export default async function RootLayout({
         queryFn: () => getFooter(),
     })
     return (
-        <html lang="fr" className="scroll-smooth">
-        <body className={`${openSans.className} overflow-x-hidden`}>
+        <html lang="fr" className="scroll-smooth overflow-x-clip">
+        <body className={`${openSans.className} overflow-x-clip`}>
         <CookieConsent />
         <UseReactQuery>
             <HydrationBoundary state={dehydrate(queryClient)}>

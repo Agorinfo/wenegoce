@@ -1,33 +1,20 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {NavItemsType} from "@/utils/types";
-import Button, {ModalButton} from "@/components/Button";
+import {ModalButton} from "@/components/Button";
 import Icon from "@/components/icons/Icon";
 import NavCard from "@/components/NavCard";
 import Link from "next/link";
 import emptyImg from "@/assets/empty-img.png"
 import clsx from "clsx";
 import ContactForm from "@/components/ContactForm";
+import useLockScroll from "@/utils/useLockScroll";
 
 const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     const [openSubNav, setOpenSubNav] = useState<number | undefined>();
     const navRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const body = document.body;
-        const scroll = () => {
-            body.classList.remove("overflow-hidden");
-        }
-        const noScroll = () => {
-            body.classList.add("overflow-hidden");
-        }
-
-        if (isOpen) {
-            noScroll();
-        } else {
-            scroll();
-        }
-    }, [isOpen]);
+    useLockScroll(isOpen);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -48,7 +35,7 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
                 className={`fixed inset-0 bg-black bg-opacity-50 transition-all duration-300 ease-linear z-[99] ${isOpen ? "visible" : "invisible"}`}></div>
             <nav
                 ref={navRef}
-                className={`absolute z-[999] lg:z-20 top-0 w-full h-screen bg-white md:w-1/2 lg:w-auto lg:h-auto pt-16 px-4 pb-4 overflow-scroll lg:overflow-visible lg:static lg:p-0 ${isOpen ? "right-0" : "-right-full"} transition-all duration-300 ease-linear`}>
+                className={`absolute z-[999] lg:z-20 top-0 w-full h-screen bg-white md:w-1/2 lg:w-auto lg:h-auto pt-16 px-4 pb-4 overflow-y-auto lg:overflow-visible lg:static lg:p-0 ${isOpen ? "right-0" : "-right-full"} transition-all duration-300 ease-linear`}>
                 <button
                     type="button"
                     aria-label="close"

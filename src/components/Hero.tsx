@@ -30,7 +30,7 @@ const Hero = ({images, teaser, content, label1, url1, label2, url2}: HeroHomeTyp
                         screen === "desktop" && <Slider images={images.data}/>
                         :
                         screen === "desktop" &&
-                        <div className="relative flex justify-center items-center w-full px-14">
+                        <div className="relative flex justify-center items-center w-full px-10 md:px-14">
                             <div
                                 className="relative max-w-[27rem] w-full lg:w-[28.125vw] aspect-square transition-all duration-700 ease-out z-10 bg-white rounded-lg rotate-[4deg]">
                                 <div className="w-full h-full relative z-10">
@@ -52,7 +52,7 @@ const Hero = ({images, teaser, content, label1, url1, label2, url2}: HeroHomeTyp
                 :
                 screen === "tablet" &&
                 <div style={{background: `url(${curveTablet.src}) no-repeat`}} className="full-width">
-                    <div className="relative flex justify-center items-center w-full px-14">
+                    <div className="relative flex justify-center items-center w-full px-10 md:px-14">
                         <div
                             className="relative max-w-[27rem] w-full lg:w-[28.125vw] aspect-square transition-all duration-700 ease-out z-10 bg-white rounded-lg rotate-[4deg]">
                             <div className="w-full h-full relative z-10">

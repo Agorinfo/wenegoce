@@ -187,7 +187,7 @@ export const CallToActionPage = ({title, text, headingClassName, buttonClassName
         backgroundColor: hover ? colors?.hover : colors?.base,
     };
     return (
-        <section className=" relative full-width -mt-[72px] md:-mt-[88px] lg:-mt-[120px] py-6 md:py-8 lg:py-12">
+        <section className=" relative full-width md:-mt-[88px] lg:-mt-[120px] py-6 md:py-8 lg:py-12">
             <div
                 className="flex flex-col lg:flex-row items-center justify-between w-full bg-grayscale-lighter p-8 rounded-lg">
                 <div className="lg:w-3/5 2xl:w-auto">

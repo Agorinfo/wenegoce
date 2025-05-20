@@ -67,7 +67,7 @@ const CookieConsent: React.FC = () => {
     };
 
     return (
-        <div className={`fixed bottom-4 left-4 p-6 rounded-xl z-50 ${isVisible ? "bg-white" : "bg-transparent"}`}>
+        <div className={`fixed bottom-4 left-0 sm:left-4 p-6 rounded-xl z-50 ${isVisible ? "bg-white" : "bg-transparent"}`}>
             <img
                 className={`${isVisible ? "size-32 -top-16" : "size-12 top-0 left-0"} absolute  right-4`}
                 src={img.src} alt="Gestion des cookies"

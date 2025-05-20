@@ -4,7 +4,7 @@ import {ModalButton} from "@/components/Button";
 import Icon from "@/components/icons/Icon";
 import NavCard from "@/components/NavCard";
 import Link from "next/link";
-import emptyImg from "@/assets/empty-img.png"
+import emptyImg from "@/assets/empty-img.png";
 import clsx from "clsx";
 import ContactForm from "@/components/ContactForm";
 import useLockScroll from "@/utils/useLockScroll";
@@ -15,6 +15,7 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
     const navRef = useRef<HTMLDivElement>(null);
 
     useLockScroll(isOpen);
+
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -35,7 +36,7 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
                 className={`fixed inset-0 bg-black bg-opacity-50 transition-all duration-300 ease-linear z-[99] ${isOpen ? "visible" : "invisible"}`}></div>
             <nav
                 ref={navRef}
-                className={`absolute z-[999] lg:z-20 top-0 w-full h-screen bg-white md:w-1/2 lg:w-auto lg:h-auto pt-16 px-4 pb-4 overflow-y-auto lg:overflow-visible lg:static lg:p-0 ${isOpen ? "right-0" : "-right-full"} transition-all duration-300 ease-linear`}>
+                className={`absolute z-[999] lg:z-20 top-0 w-full h-screen bg-white md:w-1/2 lg:w-auto lg:h-auto pt-16 px-4 pb-4 overflow-scroll lg:overflow-visible lg:static lg:p-0 ${isOpen ? "right-0" : "-right-full"} transition-all duration-300 ease-linear`}>
                 <button
                     type="button"
                     aria-label="close"
@@ -80,7 +81,7 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
                             }
                             {item.subNavItems.length > 0 &&
                                 <div
-                                    className={clsx("w-full max-w-screen-xl overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.68,-0.55,0,2.61)] lg:absolute lg:z-50 lg:left-0 lg:bg-featured-shine lg:border lg:border-greyscale-lighter lg:shadow-subNav lg:rounded-lg lg:px-[8.333vw]",
+                                    className={clsx("w-full max-w-screen-xl overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.68,-0.55,0,2.61)] lg:absolute lg:z-50 lg:left-0 lg:bg-featured-shine lg:border lg:border-greyscale-lighter lg:shadow-subNav lg:rounded-lg lg:px-[7.333vw]",
                                         openSubNav === index ? "max-h-[2000px] lg:visible opacity-100 lg:top-[110%]" : "lg:invisible opacity-0 max-h-0 lg:top-[90%]"
                                     )}>
                                     <div

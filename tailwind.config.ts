@@ -118,8 +118,8 @@ const config: Config = {
                 storyCard:"0px 12px 16px 0px rgba(0, 0, 0, 0.08)"
             },
             height: {
-                hero: "calc(100vh - 115px)",
-                heroPage: "calc(100vh - 115px)",
+                hero: "calc(100dvh - 90px)",
+                heroPage: "calc(100dvh - 90px)",
             },
             listStyleImage: {
                 check: 'url("/check.svg")',

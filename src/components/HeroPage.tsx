@@ -23,7 +23,7 @@ const HeroPage = ({images, teaser, content, label1, url1, label2, url2, backgrou
 
             <div
                 className="pb-6 h-[110svh] se:h-[140svh] tabletH:h-[130svh] sm:pb-20 lg:pb-12 lg:h-heroPage grid lg:grid-cols-2 md:gap-[1.729vw] lg:flex-row relative z-10">
-                <Content
+                {content && <Content
                     teaser={teaser}
                     content={content}
                     label1={label1}
@@ -35,8 +35,8 @@ const HeroPage = ({images, teaser, content, label1, url1, label2, url2, backgrou
                     btn1Style={btn1Style}
                     onMouseEnter={() => setHover(true)}
                     onMouseLeave={() => setHover(false)}
-                />
-                <Slider images={images.data}/>
+                />}
+                <Slider images={images?.data}/>
             </div>
         </section>
     );

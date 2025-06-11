@@ -11,13 +11,18 @@ import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
 import getSolution from "@/actions/getSolution";
 import emptyImg from "@/assets/empty-img.png"
+import {draftMode} from "next/headers";
 
 async function getData(slug: string) {
-    const {API_URL, API_KEY} = process.env
-    const res = await fetch(`${API_URL}/solutions?populate=brandImg,%20heroArchive.logo,%20heroArchive.informationCard.image,%20heroArchive.background,heroArchive.moduleList,%20reassurance.card,%20HeroPage.images,%20HeroPage.logo,%20HeroPage.content,%20cta,%20FeaturesReleased.details,%20featuresReleasedImg,%20newsletter,features,modules.features.activities,modules.features.details,%20modules.features.activities,%20solutionComp&filters%5Bslug%5D%5B%24eq%5D=${slug}`, {
+    const {API_URL, API_KEY, STRAPI_PREVIEW_TOKEN } = process.env
+    const { isEnabled } = draftMode();
+    const publicationState = isEnabled ? 'preview' : 'live';
+    const token = isEnabled ? STRAPI_PREVIEW_TOKEN : API_KEY;
+
+    const res = await fetch(`${API_URL}/solutions?populate=brandImg,heroArchive.logo,heroArchive.informationCard.image,heroArchive.background,heroArchive.moduleList,reassurance.card,HeroPage.images,HeroPage.logo,HeroPage.content,cta,FeaturesReleased.details,featuresReleasedImg,newsletter,features,modules.features.activities,modules.features.details,modules.features.activities,solutionComp&filters%5Bslug%5D%5B%24eq%5D=${slug}&publicationState=${publicationState}`, {
         cache: 'no-store',
         headers: {
-            Authorization: `Bearer ${API_KEY}`
+            Authorization: `Bearer ${token}`
         }
     })
 
@@ -32,7 +37,7 @@ export const generateMetadata = async ({params}: { params: { slug: string } }): 
     const {BACK_URL, FRONT_URL} = process.env;
     const solution = await getSolution(params.slug)
     const global = await getGlobal();
-    const metas = solution[0].attributes.metas
+    const metas = solution[0]?.attributes.metas
 
     return {
         metadataBase: new URL(FRONT_URL + "/" + params.slug),
@@ -62,44 +67,44 @@ export const generateMetadata = async ({params}: { params: { slug: string } }): 
 
 const Solution = async ({params}: { params: { slug: string } }) => {
     const data = await getData(params.slug);
-    const colors = createColorPalette(data[0].attributes.brandColor);
+    const colors = createColorPalette(data[0]?.attributes.brandColor ? data[0]?.attributes.brandColor : "#000000");
 
     return (
         <>
             <HeroPage
-                images={data[0].attributes.HeroPage.images}
-                teaser={data[0].attributes.HeroPage.content.teaser}
-                content={data[0].attributes.HeroPage.content.content}
-                label1={data[0].attributes.HeroPage.content.label1}
-                url1={data[0].attributes.HeroPage.content.url1}
-                label2={data[0].attributes.HeroPage.content.label2}
-                url2={data[0].attributes.HeroPage.content.url2}
-                background={data[0].attributes.brandImg.data ? data[0].attributes.brandImg.data?.attributes : emptyImg.src}
+                images={data[0]?.attributes.HeroPage?.images}
+                teaser={data[0]?.attributes.HeroPage?.content.teaser}
+                content={data[0]?.attributes.HeroPage?.content.content}
+                label1={data[0]?.attributes.HeroPage?.content.label1}
+                url1={data[0]?.attributes.HeroPage?.content.url1}
+                label2={data[0]?.attributes.HeroPage?.content.label2}
+                url2={data[0]?.attributes.HeroPage?.content.url2}
+                background={data[0]?.attributes.brandImg.data ? data[0]?.attributes.brandImg.data?.attributes : emptyImg.src}
                 colors={colors}
             />
             <CallToActionPage
-                title={data[0].attributes.cta.title}
-                text={data[0].attributes.cta.text}
+                title={data[0]?.attributes.cta?.title}
+                text={data[0]?.attributes.cta?.text}
                 buttonClassName="text-white outline-none ring-accent-muted focus-visible:ring"
                 colors={colors}
             />
             <SolutionFeatures
-                icon={data[0].attributes.icon}
-                title={data[0].attributes.featureTitle}
-                teaser={data[0].attributes.featureTeaser}
-                dataModules={data[0].attributes.modules.data}
+                icon={data[0]?.attributes?.icon}
+                title={data[0]?.attributes?.featureTitle}
+                teaser={data[0]?.attributes?.featureTeaser}
+                dataModules={data[0]?.attributes?.modules?.data}
                 colors={colors}
             />
             <FeaturesReleased
-                data={data[0].attributes.FeaturesReleased}
-                image={data[0].attributes.featuresReleasedImg}
+                data={data[0]?.attributes?.FeaturesReleased}
+                image={data[0]?.attributes?.featuresReleasedImg}
                 colors={colors}
             />
-            <ReassuranceSolution data={data[0].attributes.reassurance} colors={colors}/>
-            {data[0].attributes.solutionComp.length ?
+            <ReassuranceSolution data={data[0]?.attributes?.reassurance} colors={colors}/>
+            {data[0]?.attributes?.solutionComp.length ?
                 <RelatedServices
                     title="En complément"
-                    solutions={data[0].attributes.solutionComp.map((solution: any) => solution.solution)}/>
+                    solutions={data[0]?.attributes?.solutionComp.map((solution: any) => solution.solution)}/>
                 :
                 null
             }

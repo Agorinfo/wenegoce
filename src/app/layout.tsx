@@ -11,6 +11,8 @@ import getFooter from "@/actions/getFooter";
 import {Toaster} from "react-hot-toast";
 import Modal from "@/components/Modal";
 import CookieConsent from "@/components/CookieConsent";
+import { draftMode} from "next/headers";
+import DisablePreview from "@/components/DisablePreview";
 
 const openSans = Open_Sans({subsets: ["latin"]});
 
@@ -19,6 +21,7 @@ export default async function RootLayout({
                                          }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const {isEnabled} = draftMode();
     const queryClient = new QueryClient()
     await queryClient.prefetchQuery({
         queryKey: ["global"],
@@ -39,6 +42,14 @@ export default async function RootLayout({
         <UseReactQuery>
             <HydrationBoundary state={dehydrate(queryClient)}>
                 <div id="modal-root"></div>
+                {isEnabled &&
+                    <div className="fixed z-[9999] top-3 left-1/2 -translate-x-1/2 text-white font-bold bg-black p-2 rounded-xl"> Mode
+                    pré-visualisation </div>
+                }
+                {
+                    isEnabled &&
+                    <DisablePreview/>
+                }
                 <Modal/>
                 <Toaster
                     position="top-center"

@@ -102,7 +102,7 @@ const HeroService = ({icon, title, teaser, heroImg, steps, stepImg, logo}: HeroS
                 </div>
             </div>}
             { width === "desktop" && <img className="full-width w-full" src={curve.src} alt=""/>}
-            <div className="grid lg:grid-cols-2 py-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 py-12">
                 <div id="service-steps"
                      className="relative flex flex-col gap-14 before:w-px before:h-full before:block before:bg-accent-muted before:absolute before:left-7 before:top-0 before:-z-10 lg:col-start-1 lg:col-end-6 lg:row-start-2 lg:row-end-5">
                     {steps.map(step => (

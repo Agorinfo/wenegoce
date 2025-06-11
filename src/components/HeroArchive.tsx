@@ -24,7 +24,7 @@ const HeroArchive = ({teaser, text, label, url, modules,}: HeroArchiveType) => {
     const [colors, setColors] = useState<{ base: string; hover: string; accent: string; muted: string; }>(initialColors)
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     const color = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.brandColor);
-    const background = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.heroArchive.background.data?.attributes.url);
+    const background = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.heroArchive.background.data.attributes.url);
 
     const [ref] = useKeenSlider<HTMLDivElement>({
         breakpoints: {
@@ -63,7 +63,7 @@ const HeroArchive = ({teaser, text, label, url, modules,}: HeroArchiveType) => {
 
     return (
         <AnimatePresence initial={false} mode={"wait"}>
-            <div className="flex flex-col lg:flex-row items-center gap-8 h-hero text-white pt-8 lg:pt-0 overflow-x-hidden">
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:h-hero text-white pt-8 lg:pt-0 overflow-x-hidden">
                 <motion.div
                     key={"services"}
                     initial={{opacity: 0}}
@@ -71,7 +71,7 @@ const HeroArchive = ({teaser, text, label, url, modules,}: HeroArchiveType) => {
                     exit={{opacity: 0}}
                     transition={{duration: 0.7}}
                     style={active ? bgStyle : undefined}
-                    className={`relative flex items-center justify-start ${active ? "p-4 md:p-8 lg:p-12" : "py-14 px-4 lg:pl-32 bg-accent"} w-full h-[40rem] rounded-lg overflow-hidden`}
+                    className={`relative flex items-center justify-start ${active ? "p-4 md:p-8 lg:p-12" : "py-14 px-4 lg:pl-32 bg-accent"} w-full lg:h-[40rem] rounded-lg overflow-hidden`}
                 >
                     {!active &&
                         <>
@@ -163,7 +163,7 @@ const HeroArchive = ({teaser, text, label, url, modules,}: HeroArchiveType) => {
                                             href={"solutions/" + active}
                                             className="link-normal-white pt-8 inline-flex items-center gap-2"
                                         >
-                                            {label}
+                                            {heroArchive.label}
                                             <Icon name="arrowRight"/>
                                         </a>
                                     </motion.div>

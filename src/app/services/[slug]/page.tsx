@@ -7,22 +7,6 @@ import getService from "@/actions/getService";
 import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
 
-// async function getData(slug:string) {
-//     const {API_URL, API_KEY} = process.env
-//     const res = await fetch(`${API_URL}/services?populate=brandImg,%20heroArchive.logo,%20heroArchive.informationCard.image,%20heroArchive.informationCard,heroArchive.moduleList,%20reassurance.card,%20hero.images,%20hero.logo,%20step,%20stepImg,%20cta.image,%20testimonial.logo,%20testimonial.avatar,%20solutionComp&filters%5Bslug%5D%5B%24eq%5D=${slug}`,{
-//         cache: "no-store",
-//         headers: {
-//             Authorization: `Bearer ${API_KEY}`
-//         }
-//     });
-//
-//     if(!res.ok) {
-//         return notFound()
-//     }
-//
-//     return res.json().then(res => res.data);
-// }
-
 export const generateMetadata = async ({params}: {params : {slug: string}}): Promise<Metadata> => {
     const {BACK_URL, FRONT_URL} = process.env;
     const global = await getGlobal();

@@ -27,7 +27,7 @@ const SolutionFeatures = ({icon, title, teaser, dataModules, colors}: SolutionFe
                 <h2 className="text-h3 font-bold">{title}</h2>
                 <p className="paragraph">{teaser}</p>
             </div>
-            <ModuleSystem modulesData={dataModules} colors={colors} />
+            {dataModules && <ModuleSystem modulesData={dataModules} colors={colors}/>}
         </div>
     );
 };

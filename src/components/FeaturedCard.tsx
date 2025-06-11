@@ -9,7 +9,7 @@ const FeaturedCard = ({icon, title, text, colors, iconClassName, className, link
     return (
         <div className={clsx("flex gap-4 md:gap-6", className)}>
             <div
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-white shadow-lg md:h-14 md:w-14 md:rounded-xl">
+                className="flex shrink-0 items-center justify-center rounded-lg text-white shadow-lg h-14 w-14 md:rounded-xl">
                 {!link ?
                     <IconCard
                         colors={colors}

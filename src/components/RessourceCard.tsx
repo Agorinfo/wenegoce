@@ -26,6 +26,7 @@ type RessourceCardProps = {
 
 const RessourceCard = ({id, src, alt, url, category, title, shortDescription, colors, categoryColor}: RessourceCardProps) => {
     const [hover, setHover] = React.useState(false);
+    console.log(category)
     return (
         <AnimatePresence mode={"popLayout"}>
         <motion.div
@@ -47,7 +48,7 @@ const RessourceCard = ({id, src, alt, url, category, title, shortDescription, co
                     {category}
                 </span>
                 <h3 className="text-titleCard pb-2 font font-bold">{title}</h3>
-                <p className="text-grayscale-darker mb-4 text-ellipsis line-clamp-6">{shortDescription}</p>
+                <p className="text-grayscale-darker mb-4 text-ellipsis line-clamp-4">{shortDescription}</p>
                 <Link
                     href={url}
                     onMouseEnter={() => setHover(true)}
@@ -55,7 +56,7 @@ const RessourceCard = ({id, src, alt, url, category, title, shortDescription, co
                     className={clsx("btn w-full border")}
                     style={{borderColor: hover ? colors.base : "#E7E7E7", color: hover ? colors.hover : colors.border}}
                 >
-                    {category === "article" ? "Lire l'article" : "Lire le témoignage"}
+                    {category.toLowerCase() === "article" ? "Lire l'article" : "Lire le témoignage"}
                 </Link>
             </div>
         </motion.div>

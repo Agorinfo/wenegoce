@@ -9,14 +9,15 @@ import toast from "react-hot-toast";
 
 const CallToAction = ({title, text, headingClassName, buttonClassName, noBg}: CallToActionType) => {
     return (
-        <section className={`${noBg ? "" : "bg-gradient-to-b from-accent-shadow"} from-50% to-white to-50% py-12 full-width -mt-px`}>
+        <section
+            className={`${noBg ? "" : "bg-gradient-to-b from-accent-shadow"} from-50% to-white to-50% py-12 full-width -mt-px`}>
             <div
                 className="flex flex-col lg:flex-row items-center justify-between w-full bg-grayscale-lighter p-8 rounded-lg gap-8">
                 <div className="flex-[3] pb-6 lg:pb-0">
                     <h3 className={"text-h3 font-bold pb-2 " + headingClassName}>{title}</h3>
                     <p className="paragraph">{text}</p>
                 </div>
-                <ModalButton label="Être recontacté par un conseiller" className={"flex-[1] btn " + buttonClassName}>
+                <ModalButton label={"Être recontacté par un conseiller"} className={"flex-1 btn " + buttonClassName}>
                     <ContactForm/>
                 </ModalButton>
             </div>
@@ -25,39 +26,56 @@ const CallToAction = ({title, text, headingClassName, buttonClassName, noBg}: Ca
 };
 export default CallToAction;
 
+export const CallToActionRessource = ({
+                                          title,
+                                          text,
+                                          headingClassName,
+                                          buttonClassName,
+                                          noBg,
+                                          buttonLabel,
+                                          url
+                                      }: CallToActionType) => {
+    return (
+        <section
+            className={`${noBg ? "" : "bg-gradient-to-b from-accent-shadow"} from-50% to-white to-50% py-12 full-width -mt-px`}>
+            <div
+                className="flex flex-col lg:flex-row items-center justify-between w-full bg-grayscale-lighter p-8 rounded-lg gap-8">
+                <div className="flex-[3] pb-6 lg:pb-0">
+                    <h3 className={"text-h3 font-bold pb-2 " + headingClassName}>{title}</h3>
+                    <p className="paragraph">{text}</p>
+                </div>
+
+                {url === "#" ?
+                    <ModalButton label={buttonLabel} className={"flex-1 btn " + buttonClassName}>
+                        <ContactForm/>
+                    </ModalButton>
+                    :
+                    <Button url={url} label={buttonLabel} className={"flex-1 btn " + buttonClassName}/>
+                }
+            </div>
+        </section>
+    );
+};
+
 export const CallToActionNewsletter = () => {
     const [email, setEmail] = useState("");
-    const [loading, setLoading] = useState(false);
 
-    async function handleSubmit(event: any) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
         try {
-            setLoading(true);
-            const response = await fetch('/api/subscribe', {
-                method: 'post',
-                body: formData,
-            });
-
-            if (!response.ok) {
-                toast.error("Une erreur est survenue !");
-                throw new Error(`response status: ${response.status}`);
-            }
-
-            const responseData = await response.json();
-            if (responseData.status === 500) {
-                toast.error(responseData.message);
-            } else {
-                toast.success("Inscription confirmée !");
-                event.target.reset();
-            }
+            await fetch("/api/subscribe", {
+                method: "POST",
+                body: JSON.stringify({
+                    email: email
+                })
+            })
+            toast.success("Email bien enregistré !")
+            e.target.reset();
         } catch (err) {
-            toast.error("Une erreur est survenue !");
-            console.error(err);
-        } finally {
-            setLoading(false);
+            console.error(err)
+            toast.error('Une erreur est survenue, ressayez ultérieurement.')
         }
-    };
+    }
 
     return (
         <section className="pt-12 pb-24 full-width">
@@ -116,7 +134,8 @@ interface CallToActionImageType {
         }
     };
     position?: "image à gauche" | "image à droite";
-    color: "bleu" | "gris";
+    color: "bleu" | "gris" | "bleu clair";
+    background?: boolean;
 }
 
 export const CallToActionImage = ({
@@ -127,18 +146,25 @@ export const CallToActionImage = ({
                                       image,
                                       position = 'image à gauche',
                                       color,
-                                      document
+                                      document,
+                                      background
                                   }: CallToActionImageType) => {
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
 
     return (
-        <section className={clsx(`py-6 sm:py-8 lg:py-12`, color === "bleu" && "text-white")}>
+        <section className={clsx(`py-6 sm:py-8 lg:py-12 full-width`,
+            color === "bleu" && "text-white",
+            color === "bleu clair" && "text-white",
+            background && "bg-gradient-to-b from-40% from-accent-shine to-40% to-white",
+        )}
+        >
             <div
-                className={clsx("grid sm:grid-cols-2 lg:grid-cols-5 w-full rounded-lg overflow-hidden lg:max-h-[27rem]", color === "gris" && "border border-grayscale-medium")}>
+                className={clsx("grid sm:grid-cols-2 lg:grid-cols-5 w-full rounded-lg overflow-clip md:h-[22rem]", color === "gris" && "border border-grayscale-medium")}>
                 <div className={clsx("flex flex-col items-start p-8",
                     position === 'image à droite' && "lg:col-span-2",
                     position === 'image à gauche' && "order-1 lg:col-span-3",
                     color === "bleu" && "bg-featured-shadow",
+                    color === "bleu clair" && "bg-featured",
                     color === "gris" && "bg-grayscale-lightest"
                 )}
                 >
@@ -165,15 +191,15 @@ export const CallToActionImage = ({
                         />
                     }
                 </div>
-                <div className={clsx("h-48 sm:h-auto max-h-[25rem] w-full object-cover",
+                <div className={clsx("h-48 sm:h-auto md:h-[22rem] w-full object-cover",
                     position === 'image à droite' && "lg:col-span-3",
                     position === 'image à gauche' && "lg:col-span-2"
                 )}
                 >
                     <img
                         className="h-full w-full object-cover object-center"
-                        src={image?.data ? backUrl + image.data.attributes.url : emptyImg.src}
-                        alt={image?.data ? image.data.attributes.alternativeText : ""}
+                        src={image && image.data ? backUrl + image.data.attributes.url : emptyImg.src}
+                        alt={image && image.data ? image.data.attributes.alternativeText : ""}
                     />
                 </div>
             </div>
@@ -196,7 +222,7 @@ export const CallToActionPage = ({title, text, headingClassName, buttonClassName
                     <p className="paragraph pb-6 lg:pb-0">{text}</p>
                 </div>
                 <ModalButton onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style={btnStyle}
-                             label="Être recontacter par un conseiller" className={clsx("btn ", buttonClassName)}>
+                             label="Être recontacté par un conseiller" className={clsx("btn ", buttonClassName)}>
                     <ContactForm/>
                 </ModalButton>
             </div>

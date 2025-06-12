@@ -65,7 +65,7 @@ const ImageWithDecoration = ({
     switch (decorationPosition) {
         case "squareOne":
             polygonPosition = "-top-12 -left-4 md:-left-10";
-            trianglePosition = "bottom-[15%] -right-[5%]";
+            trianglePosition = "-bottom-[20%] -right-[5%] lg:-right-[15%]";
             break;
         case "squareTwo":
             polygonPosition = "-top-5 md:-top-8 left-24 md:left-[24%]";
@@ -92,7 +92,7 @@ const ImageWithDecoration = ({
         >
             <div className="relative">
                 <span
-                    className={`absolute ${polygonPosition} ${layout === "square" && squareSize === "small" ? "w-[10rem]" : "w-[10rem] lg:w-[21rem]"}`}>{isLandscape ? landscapePolygon : polygon}</span>
+                    className={`absolute ${polygonPosition} ${layout === "square" && squareSize === "small" ? "w-[10rem] lg:w-[15rem]" : "w-[10rem] lg:w-[21rem]"}`}>{isLandscape ? landscapePolygon : polygon}</span>
                 <div className={clsx("relative w-full bg-white shadow-slide rounded-2xl p-3 z-10",
                     rotation === 1 && "rotate-[4deg]",
                     rotation === 2 && "rotate-[-2deg]",
@@ -116,7 +116,7 @@ const ImageWithDecoration = ({
                     </div>
                 </div>
                 <span
-                    className={`absolute ${trianglePosition} ${layout === "square" && squareSize === "small" ? "w-[55px]" : "w-[55px] md:w-[110px]"} z-20`}>{triangle}</span>
+                    className={`absolute ${trianglePosition} ${layout === "square" && squareSize === "small" ? "w-[70px] lg:w-[110px]" : "w-[55px] md:w-[110px]"} z-20`}>{triangle}</span>
             </div>
         </div>
     );

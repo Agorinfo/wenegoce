@@ -39,7 +39,7 @@ const SectionFaq = () => {
                         alt={global.data.favicon.data.attributes.alternativeText}
                     />
                 </span>
-                <div className="">
+                <div>
                     <div className="grid lg:grid-cols-8 items-center gap-[3.283vw] xl:gap-[2.2vw]">
                         <div className="lg:col-span-3">
                             <BlocksRenderer
@@ -76,9 +76,9 @@ const SectionFaq = () => {
                                             case 4:
                                             case 5:
                                             case 6:
-                                                return <h3 className="text-h3">{children}</h3>
+                                                return <h3 className="text-h3 pb-4">{children}</h3>
                                             default:
-                                                return <h1 className="text-h1">{children}</h1>
+                                                return <h1 className="text-h1 pb-4">{children}</h1>
                                         }
                                     }
                                 }}

@@ -36,7 +36,7 @@ const RessourceContent = () => {
             <div className="py-16">
                 <div>
                     <button
-                        className="text-featured"
+                        className="text-featured mb-16"
                         onClick={() => window.history.back()}
                     >
                         <ArrowLeft size={24}/>
@@ -120,7 +120,7 @@ const RessourceContent = () => {
                 />}
             <div>
                 <button
-                    className="text-featured"
+                    className="text-featured pb-8"
                     onClick={() => window.history.back()}
                 >
                     <ArrowLeft size={24}/>

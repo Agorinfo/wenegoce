@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {ModalButton} from "@/components/Button";
-import SidebarCard from "@/components/SidebarCard";
 import ContactForm from "@/components/ContactForm";
 import Content from "@/components/Content";
 import {HeroArchiveServiceType} from "@/utils/types";
@@ -9,6 +8,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import Icon from "@/components/icons/Icon";
 import {HorizontalCarousel} from "@/components/HorizontalCarousel";
 import {VerticalCarousel} from "@/components/VerticalCarousel";
+import SidebarCardService from "@/components/SidebarCardService";
 
 const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveServiceType) => {
     const [active, setActive] = useState<string | undefined>();
@@ -16,7 +16,7 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
 
     const background = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.heroArchive.background.data?.attributes.url);
     const color = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.brandColor);
-
+    console.log(modules)
     const bgStyle = {
         backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.24) 0%, rgba(0, 0, 0, 0.24) 100%), linear-gradient(257deg, ${color[0]} 0%, rgba(146, 86, 32, 0.00) 25.01%, ${color[0]} 100%), linear-gradient(0deg, ${color[0]} 0%, ${color[0]} 100%), url(${backUrl! + background})`,
         backgroundSize: "cover",
@@ -26,7 +26,8 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
 
     return (
         <AnimatePresence initial={false} mode={"wait"}>
-            <div className="flex flex-col lg:flex-row items-center gap-8 lg:h-hero text-white pt-8 lg:pt-0 overflow-x-hidden">
+            <div
+                className="flex flex-col lg:flex-row items-center gap-8 lg:h-hero text-white pt-8 lg:pt-0 overflow-x-hidden">
                 <motion.div
                     key={"services"}
                     initial={{opacity: 0}}
@@ -39,10 +40,8 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
                     {!active &&
                         <>
                             <img
-                                className="absolute inset-0 mix-blend-multiply w-full h-full backdrop-brightness-75"
-                                src="/agorinfo-filigrane-min.png"
-                                srcSet="/agorinfo-filigrane-min.png 200w, /agorinfo-filigrane-max.png 400w"
-                                sizes="(max-width: 600px) 200px, 50vw"
+                                className="absolute inset-0 w-full h-full"
+                                src="/fond_wenegoce_site.png"
                                 alt=""
                             />
                             <div className="relative z-10">
@@ -149,7 +148,8 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
                                         transition={{duration: 0.7}}
                                         className="pt-4"
                                     >
-                                        <ModalButton label="Réserver une démo" className="btn btn-gray w-full lg:hidden">
+                                        <ModalButton label="Réserver une démo"
+                                                     className="btn btn-gray w-full lg:hidden">
                                             <ContactForm/>
                                         </ModalButton>
                                     </motion.div>
@@ -161,8 +161,8 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
                 {/* Desktop : vertical carousel */}
                 <div className="hidden lg:block">
                     <VerticalCarousel>
-                        {modules.map(item => (
-                            <SidebarCard
+                        {modules.map((item, index) => (
+                            <SidebarCardService
                                 key={item.id}
                                 active={active}
                                 setActive={setActive}
@@ -172,18 +172,16 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
                     </VerticalCarousel>
                 </div>
                 {/* Mobile : horizontal carousel */}
-                <div className="lg:hidden">
-                    <HorizontalCarousel>
-                        {modules.map(item => (
-                            <SidebarCard
-                                key={item.id}
-                                active={active}
-                                setActive={setActive}
-                                service={item.attributes.slug}
-                            />
-                        ))}
-                    </HorizontalCarousel>
-                </div>
+                <HorizontalCarousel>
+                    {modules.map((item) => (
+                        <SidebarCardService
+                            key={item.id}
+                            active={active}
+                            setActive={setActive}
+                            service={item.attributes.slug}
+                        />
+                    ))}
+                </HorizontalCarousel>
             </div>
         </AnimatePresence>
     );

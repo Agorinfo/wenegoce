@@ -58,6 +58,7 @@ const config: Config = {
                     shadow: "#18290A",
                     shine: "#F5FBEA",
                     peps: "#324B1C",
+                    light: "#639E24"
 
                 },
                 featured: {
@@ -65,7 +66,7 @@ const config: Config = {
                     muted: "#B2DFFF",
                     shadow: "#002651",
                     shine: "#EEF7FF",
-                    peps: "#006EDF"
+                    peps: "#006EDF",
                 },
                 grayscale: {
                     darkest: "#3D3D3D",

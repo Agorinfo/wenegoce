@@ -1,33 +1,21 @@
 import React, {useState} from 'react';
-import Button, {ModalButton} from "@/components/Button";
+import {ModalButton} from "@/components/Button";
 import SidebarCard from "@/components/SidebarCard";
-import Modal from "@/components/Modal";
 import ContactForm from "@/components/ContactForm";
 import Content from "@/components/Content";
 import {HeroArchiveServiceType} from "@/utils/types";
 import InformationCard from "@/components/InformationCard";
 import {AnimatePresence, motion} from "framer-motion";
 import Icon from "@/components/icons/Icon";
-import {useKeenSlider} from "keen-slider/react";
+import {HorizontalCarousel} from "@/components/HorizontalCarousel";
+import {VerticalCarousel} from "@/components/VerticalCarousel";
 
 const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveServiceType) => {
     const [active, setActive] = useState<string | undefined>();
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
 
-    const background = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.heroArchive.background.data.attributes.url);
+    const background = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.heroArchive.background.data?.attributes.url);
     const color = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.brandColor);
-
-    const [ref] = useKeenSlider<HTMLDivElement>({
-        breakpoints: {
-            "(min-width: 400px)": {
-                slides: {perView: 2, spacing: 8},
-            }
-        },
-        slides: {
-            perView: 1,
-            spacing: 32,
-        }
-    })
 
     const bgStyle = {
         backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.24) 0%, rgba(0, 0, 0, 0.24) 100%), linear-gradient(257deg, ${color[0]} 0%, rgba(146, 86, 32, 0.00) 25.01%, ${color[0]} 100%), linear-gradient(0deg, ${color[0]} 0%, ${color[0]} 100%), url(${backUrl! + background})`,
@@ -46,7 +34,7 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
                     exit={{opacity: 0}}
                     transition={{duration: 0.7}}
                     style={active ? bgStyle : undefined}
-                    className={`relative flex items-center justify-start ${active ? "p-4 md:p-8 lg:p-12" : "py-14 px-4 lg:pl-32 bg-accent"} w-full lg:h-[40rem] rounded-lg overflow-hidden`}
+                    className={`relative flex items-center justify-start ${active ? "p-4 md:p-8 lg:p-12" : "py-14 px-4 lg:pl-32 bg-accent"} w-full lg:w-auto lg:flex-auto lg:h-[40rem] rounded-lg overflow-hidden`}
                 >
                     {!active &&
                         <>
@@ -170,22 +158,31 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
                         })
                     }
                 </motion.div>
-                {/*<div className="hidden lg:grid gap-8">*/}
-                {/*    {modules.map(item => (*/}
-                {/*        <SidebarCard active={active} setActive={setActive} key={item.id}*/}
-                {/*                     service={item.attributes.slug}/>*/}
-                {/*    ))}*/}
-                {/*</div>*/}
-                <div ref={ref} className="keen-slider max-h-[640px] lg:!w-[300px]">
-                    {modules.map(item => (
-                        <div key={item.id} className="keen-slider__slide !min-w-[7.5rem] rounded-2xl">
+                {/* Desktop : vertical carousel */}
+                <div className="hidden lg:block">
+                    <VerticalCarousel>
+                        {modules.map(item => (
                             <SidebarCard
+                                key={item.id}
                                 active={active}
                                 setActive={setActive}
                                 service={item.attributes.slug}
                             />
-                        </div>
-                    ))}
+                        ))}
+                    </VerticalCarousel>
+                </div>
+                {/* Mobile : horizontal carousel */}
+                <div className="lg:hidden">
+                    <HorizontalCarousel>
+                        {modules.map(item => (
+                            <SidebarCard
+                                key={item.id}
+                                active={active}
+                                setActive={setActive}
+                                service={item.attributes.slug}
+                            />
+                        ))}
+                    </HorizontalCarousel>
                 </div>
             </div>
         </AnimatePresence>

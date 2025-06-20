@@ -66,8 +66,12 @@ const SidebarCardService = ({service, active, setActive}: SidebarCardProps ) => 
         <button
             type={"button"}
             onClick={() => setActive(active === service ? undefined : service)}
-            className={`sidebarCard min-w-[7.5rem] w-full lg:w-auto lg:min-w-[230px] ${active === service ? `border-b-4 pb-2 lg:border-b-0 lg:pb-6 lg:pr-4 lg:border-r-8 ${borderColor} bg-white text-black` : ` ${bgColor} ${bgHover}`}`}>
-            <img src={icon} alt="icon" className="w-14 h-14"/>
+            className={`sidebarCard min-w-[7.5rem] w-full lg:w-auto lg:min-w-[270px] ${active === service ? `border-b-4 pb-2 lg:border-b-0 lg:pb-6 lg:pr-4 lg:border-r-8 ${borderColor} bg-white text-black` : ` ${bgColor} ${bgHover}`} `}>
+            <img
+                src={icon}
+                alt="icon"
+                className="w-14 h-14"
+            />
             <span className="flex-auto text-left">{label}</span>
         </button>
     );

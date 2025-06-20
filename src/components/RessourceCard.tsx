@@ -26,7 +26,7 @@ type RessourceCardProps = {
 
 const RessourceCard = ({id, src, alt, url, category, title, shortDescription, colors, categoryColor}: RessourceCardProps) => {
     const [hover, setHover] = React.useState(false);
-    console.log(category)
+
     return (
         <AnimatePresence mode={"popLayout"}>
         <motion.div

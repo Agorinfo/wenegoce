@@ -16,7 +16,7 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
 
     const background = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.heroArchive.background.data?.attributes.url);
     const color = modules.filter(module => active === module.attributes.slug).map(item => item.attributes.brandColor);
-    console.log(modules)
+
     const bgStyle = {
         backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.24) 0%, rgba(0, 0, 0, 0.24) 100%), linear-gradient(257deg, ${color[0]} 0%, rgba(146, 86, 32, 0.00) 25.01%, ${color[0]} 100%), linear-gradient(0deg, ${color[0]} 0%, ${color[0]} 100%), url(${backUrl! + background})`,
         backgroundSize: "cover",
@@ -132,13 +132,15 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
                                         transition={{duration: 0.7}}
                                         className="text-right"
                                     >
-                                        <a
-                                            href={"services/" + active}
-                                            className="link-normal-white pt-8 inline-flex items-center gap-2"
-                                        >
-                                            {label}
-                                            <Icon name="arrowRight"/>
-                                        </a>
+                                        {heroArchive.url && heroArchive.label &&
+                                            <a
+                                                href={heroArchive.url}
+                                                className="link-normal-white pt-8 inline-flex items-center gap-2"
+                                            >
+                                                {heroArchive.label}
+                                                <Icon name="arrowRight"/>
+                                            </a>
+                                        }
                                     </motion.div>
                                     <motion.div
                                         key={"teaser-" + item.id}

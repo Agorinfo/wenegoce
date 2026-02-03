@@ -12,7 +12,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
     return {
         metadataBase: new URL(FRONT_URL! + "/mentions-legales"),
-        title: metas.meta_title || "We Négoce, éditeur de solution logicielles métier",
+        title: metas?.meta_title || "Mentions Légales",
         description: metas?.meta_description || "Solutions logicielles de gestion : We Négoce",
         openGraph: {
             title: metas?.meta_title || "We Négoce, éditeur de solution logicielles métier",

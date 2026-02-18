@@ -18,11 +18,11 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
     return {
         metadataBase: new URL(FRONT_URL + "/solutions"),
-        title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+        title: metas?.meta_title || "Solution | Wenegoce",
         description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
         openGraph: {
-            title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
-            siteName: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+            title: metas?.meta_title || "Solution | Wenegoce",
+            siteName: metas?.meta_title || "Solution | Wenegoce",
             description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
             url: FRONT_URL + "/solutions",
             images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
@@ -30,7 +30,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
         twitter: {
             card: 'summary_large_image',
             site: FRONT_URL + "/solutions",
-            title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
+            title: metas?.meta_title || "Solution | Wenegoce",
             description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
             images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
         },

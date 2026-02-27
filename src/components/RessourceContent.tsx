@@ -10,6 +10,7 @@ import RelatedRessources from "@/components/RelatedRessources";
 import ImageWithDecoration from "@/components/ImageWithDecoration";
 import CallToAction, {CallToActionRessource} from "@/components/CallToAction";
 import getGlobal from "@/actions/getGlobal";
+import {ClickableImage} from "@/components/ImageLightbox";
 
 const RessourceContent = () => {
     const {slug} = useParams();
@@ -86,15 +87,22 @@ const RessourceContent = () => {
                                         const isEven = index % 2 === 1;
 
                                         return (
-                                            <ImageWithDecoration
-                                                src={image.url}
-                                                alt={image.alternativeText || ""}
-                                                legend={image.caption}
-                                                layout="landscape"
-                                                decorationPosition={isEven ? "landscapeTwo" : "landscapeOne"}
-                                                squareSize="large"
-                                                rotation={isEven ? 2 : 1}
-                                            />
+                                            <>
+                                                {image.caption !== "no-border" ?
+                                                    <ImageWithDecoration
+                                                        src={image.url}
+                                                        alt={image.alternativeText || ""}
+                                                        legend={image.caption}
+                                                        layout="landscape"
+                                                        decorationPosition={isEven ? "landscapeTwo" : "landscapeOne"}
+                                                        squareSize="large"
+                                                        rotation={isEven ? 2 : 1}
+                                                    />
+                                                    :
+                                                    // <img className="max-w-[36rem] aspect-video mx-auto" src={image.url} alt={image.alternativeText || ""}/>
+                                                    <ClickableImage className="max-w-[36rem] aspect-video mx-auto" src={image.url} alt={image.alternativeText || ""} />
+                                                }
+                                            </>
                                         );
                                     }
                                 }}

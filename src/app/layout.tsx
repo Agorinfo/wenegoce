@@ -13,6 +13,8 @@ import Modal from "@/components/Modal";
 import CookieConsent from "@/components/CookieConsent";
 import { draftMode} from "next/headers";
 import DisablePreview from "@/components/DisablePreview";
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 
 const openSans = Open_Sans({subsets: ["latin"]});
 
@@ -38,6 +40,7 @@ export default async function RootLayout({
     return (
         <html lang="fr" className="scroll-smooth overflow-x-clip">
         <body className={`${openSans.className} overflow-x-clip`}>
+        <GoogleAnalytics gaId="G-7RFSJ2LSB7" />
         <CookieConsent />
         <UseReactQuery>
             <HydrationBoundary state={dehydrate(queryClient)}>

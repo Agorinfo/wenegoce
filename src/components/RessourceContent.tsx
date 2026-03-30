@@ -10,9 +10,9 @@ import RelatedRessources from "@/components/RelatedRessources";
 import ImageWithDecoration from "@/components/ImageWithDecoration";
 import {CallToActionRessource} from "@/components/CallToAction";
 import getGlobal from "@/actions/getGlobal";
-import VideoWithDecoration from "../../../wenegoce/src/components/VideoWithDecoration";
 import {createColorPalette} from "@/lib/createColorPalette";
 import { ClickableImage } from "./ImageLightbox";
+import VideoWithDecoration from "@/components/VideoWithDecoration";
 
 const ListFormatContext = createContext<"ordered" | "unordered" | null>(null);
 const useListFormat = () => useContext(ListFormatContext);

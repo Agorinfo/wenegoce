@@ -150,7 +150,6 @@ const RessourceContent = () => {
                                                         rotation={isEven ? 2 : 1}
                                                     />
                                                     :
-                                                    // <img className="max-w-[36rem] aspect-video mx-auto" src={image.url} alt={image.alternativeText || ""}/>
                                                     <ClickableImage className="max-w-full mx-auto object-contain px-4" src={image.url} alt={image.alternativeText || ""} />
                                                 }
                                             </>

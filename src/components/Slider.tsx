@@ -102,20 +102,22 @@ export default function Slider({images, logo, layout = "square"}: Props) {
                         exit={{opacity: 0}}
                         transition={{duration: 0.6}}
                     >
-                        <Image
-                            key={currentImage?.url || "empty"}
-                            src={
-                                currentImage
-                                    ? currentImage.formats?.small
-                                        ? backUrl + currentImage.formats.small.url
-                                        : backUrl + currentImage.url
-                                    : emptyImg.src
-                            }
-                            alt={currentImage?.alternativeText || ""}
-                            className="object-cover"
-                            fill
-                            sizes={isLandscape ? "36rem" : "28rem"}
-                        />
+                        <div className="relative h-full w-full overflow-hidden rounded-lg">
+                            <Image
+                                key={currentImage?.url || "empty"}
+                                src={
+                                    currentImage
+                                        ? currentImage.formats?.small
+                                            ? backUrl + currentImage.formats.small.url
+                                            : backUrl + currentImage.url
+                                        : emptyImg.src
+                                }
+                                alt={currentImage?.alternativeText || ""}
+                                className="object-cover"
+                                fill
+                                sizes={isLandscape ? "36rem" : "28rem"}
+                            />
+                        </div>
                     </motion.div>
                 </AnimatePresence>
             </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import emptyImg from "@/assets/empty-img.png";
 import Link from "next/link";
 import {createColorPalette} from "@/lib/createColorPalette";
+import Image from "next/image";
 
 type RelatedRessourceCardType = {
     thumbnail: string;
@@ -24,11 +25,15 @@ const RelatedRessourceCard = ({thumbnail, alt, category, title, date, color, slu
             className="grid grid-cols-3 gap-4 rounded-2xl overflow-hidden border-2"
             style={{borderColor: colors.base}}
         >
-            <img
-                className="w-full h-full object-cover"
-                src={thumbnail ? backUrl + thumbnail : emptyImg.src}
-                alt={alt}
-            />
+            <div className="relative min-h-36">
+                <Image
+                    className="object-cover"
+                    src={thumbnail ? backUrl + thumbnail : emptyImg.src}
+                    alt={alt}
+                    fill
+                    sizes="33vw"
+                />
+            </div>
             <div className="col-span-2 p-4">
                 <span
                     className="inline-block text-white px-2 py-1 rounded-lg mb-6"

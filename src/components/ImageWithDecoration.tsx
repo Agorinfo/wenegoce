@@ -2,6 +2,7 @@
 import React from 'react';
 import clsx from "clsx";
 import emptyImg from "@/assets/empty-img.png"
+import Image from "next/image";
 
 type ImageWithDecorationType = {
     src: string;
@@ -104,9 +105,13 @@ const ImageWithDecoration = ({
                 )}
                 >
                     <div className="relative w-full h-full flex items-center justify-center">
-                        <img
-                            className={`relative max-w-[34rem] w-full ${layout === "landscape" ? "aspect-[1.3/1]" : "aspect-square"} object-cover object-center rounded-xl bg-white border border-grayscale-lighter`}
-                            src={src ? src : emptyImg.src} alt={alt ? alt : ""}/>
+                        <Image
+                            className="object-cover object-center rounded-xl bg-white border border-grayscale-lighter"
+                            src={src ? src : emptyImg.src}
+                            alt={alt ? alt : ""}
+                            fill
+                            sizes={layout === "landscape" ? "36rem" : "27rem"}
+                        />
                         {legend &&
                             <>
                                 <span className="absolute inset-0 bg-legend" />

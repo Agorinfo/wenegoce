@@ -7,6 +7,7 @@ import {useQuery} from "@tanstack/react-query";
 import getHome from "@/actions/getHome";
 import Loader from "@/components/Loader";
 import emptyImg from "@/assets/empty-img.png"
+import Image from "next/image";
 
 const Support = () => {
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
@@ -26,10 +27,12 @@ const Support = () => {
             <Curve/>
             <section className="full-width bg-map pb-12">
                 <div className="grid md:grid-cols-2 gap-[5.729vw] xl:gap-[3.5vw]">
-                    <img
-                        className="w-full h-full object-contain"
+                    <Image
+                        className="w-full h-auto object-contain"
                         src={image.data ? backUrl + image.data.attributes.url : emptyImg.src}
                         alt={image.data ? image.data.attributes.alternativeText : ""}
+                        width={640}
+                        height={480}
                     />
                     <Content
                         teaser={teaser}

@@ -5,6 +5,7 @@ import {ArrowLeft, ArrowRight} from "@phosphor-icons/react";
 import clsx from "clsx";
 import Icon from "@/components/icons/Icon";
 import emptyImg from "@/assets/empty-img.png";
+import Image from "next/image";
 
 type ImageType = {
     url: string;
@@ -84,10 +85,12 @@ export default function Slider({images, logo, layout = "square"}: Props) {
             >
                 {logo && (
                     <div className="absolute top-6 left-4 w-24 h-10 z-20">
-                        <img
+                        <Image
                             src={backUrl + logo.data.attributes.url}
                             alt={logo.data.attributes.alternativeText}
                             className="w-full h-full object-contain bg-white"
+                            width={96}
+                            height={40}
                         />
                     </div>
                 )}
@@ -99,9 +102,8 @@ export default function Slider({images, logo, layout = "square"}: Props) {
                         exit={{opacity: 0}}
                         transition={{duration: 0.6}}
                     >
-                        <img
+                        <Image
                             key={currentImage?.url || "empty"}
-
                             src={
                                 currentImage
                                     ? currentImage.formats?.small
@@ -110,7 +112,9 @@ export default function Slider({images, logo, layout = "square"}: Props) {
                                     : emptyImg.src
                             }
                             alt={currentImage?.alternativeText || ""}
-                            className="w-full h-full object-cover"
+                            className="object-cover"
+                            fill
+                            sizes={isLandscape ? "36rem" : "28rem"}
                         />
                     </motion.div>
                 </AnimatePresence>

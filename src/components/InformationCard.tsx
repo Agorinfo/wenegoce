@@ -2,6 +2,7 @@ import React from 'react';
 import {Check} from "@phosphor-icons/react";
 import Icon from "@/components/icons/Icon";
 import {motion} from "framer-motion";
+import Image from "next/image";
 
 interface InformationCardProps {
     logo?: {
@@ -49,10 +50,12 @@ const InformationCard = ({logo, data, modules, badge, icon, colors}: Information
             className="flex text-grayscale-darkest lg:h-[14.875rem] bg-white rounded-lg">
             <div className="relative w-[14.875rem] hidden lg:block">
                 {data?.image?.data &&
-                    <img
-                        className="hidden lg:block w-full h-full object-cover rounded-l-lg"
+                    <Image
+                        className="hidden lg:block object-cover rounded-l-lg"
                         src={backUrl + data.image.data.attributes.url}
                         alt={data.image.data.attributes.alternativeText}
+                        fill
+                        sizes="15rem"
                     />
                 }
                 {icon &&
@@ -61,10 +64,12 @@ const InformationCard = ({logo, data, modules, badge, icon, colors}: Information
                     </div>
                 }
                 {logo?.data &&
-                    <img
+                    <Image
                         src={backUrl + logo.data.attributes.url}
                         alt={logo.data.attributes.alternativeText}
                         className="hidden lg:block absolute -bottom-4 left-4 w-32 h-12 rounded-lg shadow-slide object-cover"
+                        width={128}
+                        height={48}
                     />
                 }
             </div>

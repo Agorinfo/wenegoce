@@ -1,6 +1,7 @@
 import React from 'react';
 import FeatureReleased from "@/components/FeatureReleased";
 import emptyImg from "@/assets/empty-img.png"
+import Image from "next/image";
 
 interface FeatureReleasedProps {
     data: {
@@ -37,9 +38,11 @@ const FeaturesReleased = ({data, image, colors}: FeatureReleasedProps) => {
                         <FeatureReleased colors={colors} key={item.id} data={item} index={index}/>
                     ))}
                     {image.data ?
-                        <img
+                        <Image
                             src={image.data ? backUrl + image.data.attributes.url : emptyImg.src}
                             alt={image.data ? image.data.attributes.alternativeText : ""}
+                            width={640}
+                            height={480}
                         />
                         : null
                     }

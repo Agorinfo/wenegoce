@@ -6,6 +6,7 @@ import ContactForm from "@/components/ContactForm";
 import clsx from "clsx";
 import emptyImg from "@/assets/empty-img.png"
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 const CallToAction = ({title, text, headingClassName, buttonClassName, noBg}: CallToActionType) => {
     return (
@@ -191,15 +192,17 @@ export const CallToActionImage = ({
                         />
                     }
                 </div>
-                <div className={clsx("h-48 sm:h-auto md:h-[22rem] w-full object-cover",
+                <div className={clsx("relative h-48 sm:h-auto md:h-[22rem] w-full object-cover",
                     position === 'image à droite' && "lg:col-span-3",
                     position === 'image à gauche' && "lg:col-span-2"
                 )}
                 >
-                    <img
-                        className="h-full w-full object-cover object-center"
+                    <Image
+                        className="object-cover object-center"
                         src={image && image.data ? backUrl + image.data.attributes.url : emptyImg.src}
                         alt={image && image.data ? image.data.attributes.alternativeText : ""}
+                        fill
+                        sizes="(min-width: 1024px) 60vw, 100vw"
                     />
                 </div>
             </div>

@@ -10,6 +10,7 @@ import Link from "next/link";
 import Modal from "@/components/Modal";
 import ContactForm from "@/components/ContactForm";
 import emptyImg from "@/assets/empty-img.png"
+import Image from "next/image";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +34,9 @@ const Header = () => {
     return (
         <header className="sticky top-0 bg-white z-[999] border-b border-greyscale-lightest shadow-nav">
             <div className="flex items-center justify-between py-6 relative max-w-screen-xl mx-auto px-4 md:px-8 xl:px-0">
-                <Link className="w-[200px]" href="/"><img className="w-full h-full object-contain" src={logo ? backUrl + logo : emptyImg.src} alt={alt ?? ""}/></Link>
+                <Link className="relative block h-12 w-[200px]" href="/">
+                    <Image className="object-contain" src={logo ? backUrl + logo : emptyImg.src} alt={alt ?? ""} fill sizes="200px"/>
+                </Link>
                 <Nav navItems={data.navItems} isOpen={isOpen} setIsOpen={setIsOpen} />
                 <ModalButton label={"Nous contacter"} className="btn btn-accent hidden lg:inline-flex">
                     <ContactForm />

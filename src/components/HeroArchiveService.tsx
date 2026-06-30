@@ -9,6 +9,7 @@ import Icon from "@/components/icons/Icon";
 import {HorizontalCarousel} from "@/components/HorizontalCarousel";
 import {VerticalCarousel} from "@/components/VerticalCarousel";
 import SidebarCardService from "@/components/SidebarCardService";
+import Image from "next/image";
 
 const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveServiceType) => {
     const [active, setActive] = useState<string | undefined>();
@@ -39,10 +40,12 @@ const HeroArchiveService = ({teaser, text, label, url, modules,}: HeroArchiveSer
                 >
                     {!active &&
                         <>
-                            <img
-                                className="absolute inset-0 w-full h-full"
+                            <Image
+                                className="object-cover"
                                 src="/fond_wenegoce_site.png"
                                 alt=""
+                                fill
+                                sizes="100vw"
                             />
                             <div className="relative z-10">
                                 <p className="text-h5 font-bold">{teaser}</p>

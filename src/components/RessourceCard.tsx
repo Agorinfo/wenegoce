@@ -4,6 +4,7 @@ import emptyImg from "@/assets/empty-img.png"
 import Link from "next/link";
 import clsx from "clsx";
 import {AnimatePresence, motion} from "framer-motion";
+import Image from "next/image";
 
 type RessourceCardProps = {
     id: number;
@@ -39,10 +40,14 @@ const RessourceCard = ({id, src, alt, url, category, title, shortDescription, co
             className={clsx("rounded-lg bg-white border-2 overflow-hidden flex flex-col")}
              style={{borderColor: colors.border}}
         >
-            <img
-                className="h-[12rem] w-full object-cover"
+            <div className="relative h-[12rem] w-full">
+            <Image
+                className="object-cover"
                 src={src ? src : emptyImg.src} alt={alt ? alt : ""}
+                fill
+                sizes="(min-width: 1024px) 33vw, 100vw"
             />
+            </div>
             <div className="flex flex-col items-start justify-between flex-auto p-4">
                 <span
                     className={clsx("inline-block px-3 py-1.5 text-white rounded-lg mb-2")}

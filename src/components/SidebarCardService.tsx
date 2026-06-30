@@ -1,5 +1,6 @@
 "use client"
 import React from 'react';
+import Image from "next/image";
 
 interface SidebarCardProps {
     service: string;
@@ -67,10 +68,12 @@ const SidebarCardService = ({service, active, setActive}: SidebarCardProps ) => 
             type={"button"}
             onClick={() => setActive(active === service ? undefined : service)}
             className={`sidebarCard min-w-[7.5rem] w-full lg:w-auto lg:min-w-[270px] ${active === service ? `border-b-4 pb-2 lg:border-b-0 lg:pb-6 lg:pr-4 lg:border-r-8 ${borderColor} bg-white text-black` : ` ${bgColor} ${bgHover}`} `}>
-            <img
-                src={icon}
+            <Image
+                src={icon || "/stepOne.png"}
                 alt="icon"
                 className="w-14 h-14"
+                width={56}
+                height={56}
             />
             <span className="flex-auto text-left">{label}</span>
         </button>

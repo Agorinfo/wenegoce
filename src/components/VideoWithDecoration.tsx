@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import clsx from "clsx";
+import Image from "next/image";
 
 type VideoWithDecorationType = {
     src: string;
@@ -45,10 +46,12 @@ const VideoWithDecoration = ({
 
                         {miniature ?
                             <>
-                                <img
-                                    className="absolute inset-0 z-10 w-full h-full rounded-lg object-cover"
+                                <Image
+                                    className="z-10 rounded-lg object-cover"
                                     src={src}
                                     alt={alt}
+                                    fill
+                                    sizes="38rem"
                                 />
                                 <button
                                     onClick={() => setMiniature(false)}

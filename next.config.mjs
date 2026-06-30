@@ -40,7 +40,7 @@ const nextConfig = {
       remotePatterns: [
           {
               protocol: 'https',
-              hostname: 'api.edilogic.fr',
+              hostname: 'back.wenegoce.fr',
           },
           {
               protocol: 'https',

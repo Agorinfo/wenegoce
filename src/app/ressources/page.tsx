@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
 import {dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query";
@@ -8,36 +8,20 @@ import getCategories from "@/actions/getCategories";
 import getFaq from "@/actions/getFaq";
 import SectionFaq from "@/components/SectionFaq";
 import getAllRessources from "@/actions/getAllRessources";
+import {buildSeoMetadata} from "@/lib/seo";
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const {BACK_URL, FRONT_URL} = process.env;
     const global = await getGlobal();
-    const metas = global.archiveRessources.metas
 
-    return {
-        metadataBase: new URL(FRONT_URL + "/services"),
-        title: metas?.meta_title || "Ressources | Wenegoce",
-        description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-        openGraph: {
-            title: metas?.meta_title || "Ressources | Wenegoce",
-            siteName: metas?.meta_title || "Ressources | Wenegoce",
-            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-            url: FRONT_URL + "/ressources",
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            site: FRONT_URL + "/services",
-            title: metas?.meta_title || "Ressources | Wenegoce",
-            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        icons: {
-            icon: `${BACK_URL}${global?.favicon.data.attributes.url}`,
-            apple: `${BACK_URL}${global?.favicon.data.attributes.url}`,
-            shortcut: `${BACK_URL}${global?.favicon.data.attributes.url}`
-        }
-    }
+    return buildSeoMetadata({
+        metas: global?.archiveRessources?.metas,
+        path: "/ressources",
+        title: "Ressources | Wenegoce",
+        description: "Guides, actualites et ressources Wenegoce pour mieux piloter vos solutions logicielles metier.",
+        siteName: global?.siteName,
+        fallbackImage: global?.archiveRessources?.image?.data?.attributes?.url,
+        favicon: global?.favicon,
+    });
 };
 
 const Ressources = async () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query";
 import getSolution from "@/actions/getSolutions";
 import getHome from "@/actions/getHome";
@@ -10,36 +10,19 @@ import ReassuranceArchiveService from "@/sections/ReassuranceArchiveService";
 import HeroArchiveServices from "@/sections/HeroArchiveServices";
 import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
+import {buildSeoMetadata} from "@/lib/seo";
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const {BACK_URL, FRONT_URL} = process.env;
     const global = await getGlobal();
-    const metas = global.archiveServices.metas
 
-    return {
-        metadataBase: new URL(FRONT_URL + "/services"),
-        title: metas?.meta_title || "Services | Wenegoce",
-        description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-        openGraph: {
-            title: metas?.meta_title || "Services | Wenegoce",
-            siteName: metas?.meta_title || "Services | Wenegoce",
-            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-            url: FRONT_URL + "/services",
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            site: FRONT_URL + "/services",
-            title: metas?.meta_title || "Services | Wenegoce",
-            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        icons: {
-            icon: `${BACK_URL}${global?.favicon.data.attributes.url}`,
-            apple: `${BACK_URL}${global?.favicon.data.attributes.url}`,
-            shortcut: `${BACK_URL}${global?.favicon.data.attributes.url}`
-        }
-    }
+    return buildSeoMetadata({
+        metas: global?.archiveServices?.metas,
+        path: "/services",
+        title: "Services | Wenegoce",
+        description: "Decouvrez les services Wenegoce pour accompagner vos projets logiciels metier.",
+        siteName: global?.siteName,
+        favicon: global?.favicon,
+    });
 };
 
 const Services = async () => {

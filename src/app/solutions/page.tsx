@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Strengths from "@/sections/Strengths";
 import {dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query";
 import {CallToActionNewsletter} from "@/components/CallToAction";
@@ -10,36 +10,19 @@ import getServices from "@/actions/getServices";
 import ReassuranceArchiveSolution from "@/sections/ReassuranceArchiveSolution";
 import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
+import {buildSeoMetadata} from "@/lib/seo";
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const {BACK_URL,FRONT_URL} = process.env;
     const global = await getGlobal();
-    const metas = global.archiveSolutions.metas
 
-    return {
-        metadataBase: new URL(FRONT_URL + "/solutions"),
-        title: metas?.meta_title || "Solution | Wenegoce",
-        description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-        openGraph: {
-            title: metas?.meta_title || "Solution | Wenegoce",
-            siteName: metas?.meta_title || "Solution | Wenegoce",
-            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-            url: FRONT_URL + "/solutions",
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            site: FRONT_URL + "/solutions",
-            title: metas?.meta_title || "Solution | Wenegoce",
-            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        icons: {
-            icon: `${BACK_URL}${global?.favicon.data.attributes.url}`,
-            apple: `${BACK_URL}${global?.favicon.data.attributes.url}`,
-            shortcut: `${BACK_URL}${global?.favicon.data.attributes.url}`
-        }
-    }
+    return buildSeoMetadata({
+        metas: global?.archiveSolutions?.metas,
+        path: "/solutions",
+        title: "Solutions logicielles metier | Wenegoce",
+        description: "Explorez les solutions logicielles Wenegoce pour piloter vos activites de negoce, distribution et services.",
+        siteName: global?.siteName,
+        favicon: global?.favicon,
+    });
 };
 
 const Solutions = async () => {

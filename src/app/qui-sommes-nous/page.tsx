@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query";
 import getAbout from "@/actions/getAbout";
 import HeroAbout from "@/sections/HeroAbout";
@@ -10,37 +10,20 @@ import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
 import CtaAbout from "@/sections/CtaAbout";
 import StepAbout from "@/sections/StepAbout";
+import {buildSeoMetadata} from "@/lib/seo";
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const {BACK_URL,FRONT_URL} = process.env;
     const about = await getAbout();
     const global = await getGlobal();
-    const metas = about.metas
 
-    return {
-        metadataBase: new URL(FRONT_URL + "/qui-sommes-nous"),
-        title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
-        description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-        openGraph: {
-            title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
-            siteName: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
-            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-            url: FRONT_URL + "/qui-sommes-nous",
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            site: FRONT_URL + "/qui-sommes-nous",
-            title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
-            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        icons: {
-            icon: `${BACK_URL}${global?.favicon.data.attributes.url}`,
-            apple: `${BACK_URL}${global?.favicon.data.attributes.url}`,
-            shortcut: `${BACK_URL}${global?.favicon.data.attributes.url}`
-        }
-    }
+    return buildSeoMetadata({
+        metas: about?.metas,
+        path: "/qui-sommes-nous",
+        title: "Wenegoce, editeur de solutions logicielles metier",
+        description: "Decouvrez Wenegoce, editeur de solutions logicielles pour les professionnels du negoce et des services.",
+        siteName: global?.siteName,
+        favicon: global?.favicon,
+    });
 };
 
 const About = async () => {

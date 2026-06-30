@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from "react";
 import {notFound} from "next/navigation";
 import HeroPage from "@/components/HeroPage";
 import {createColorPalette} from "@/lib/createColorPalette";
@@ -10,17 +10,18 @@ import RelatedServices from "@/sections/RelatedServices";
 import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
 import getSolution from "@/actions/getSolution";
-import emptyImg from "@/assets/empty-img.png"
+import emptyImg from "@/assets/empty-img.png";
 import {draftMode} from "next/headers";
+import {buildSeoMetadata} from "@/lib/seo";
 
 async function getData(slug: string) {
-    const {API_URL, API_KEY, STRAPI_PREVIEW_TOKEN } = process.env
-    const { isEnabled } = draftMode();
-    const publicationState = isEnabled ? 'preview' : 'live';
+    const {API_URL, API_KEY, STRAPI_PREVIEW_TOKEN} = process.env
+    const {isEnabled} = draftMode();
+    const publicationState = isEnabled ? "preview" : "live";
     const token = isEnabled ? STRAPI_PREVIEW_TOKEN : API_KEY;
 
-    const res = await fetch(`${API_URL}/solutions?populate=brandImg,heroArchive.logo,heroArchive.informationCard.image,heroArchive.background,heroArchive.moduleList,reassurance.card,HeroPage.images,HeroPage.logo,HeroPage.content,cta,FeaturesReleased.details,featuresReleasedImg,newsletter,features,modules.features.activities,modules.features.details,modules.features.activities,solutionComp&filters%5Bslug%5D%5B%24eq%5D=${slug}&publicationState=${publicationState}`, {
-        cache: 'no-store',
+    const res = await fetch(`${API_URL}/solutions?populate=brandImg,heroArchive.logo,heroArchive.informationCard.image,heroArchive.background,heroArchive.moduleList,reassurance.card,HeroPage.images,HeroPage.logo,HeroPage.content,cta,FeaturesReleased.details,featuresReleasedImg,newsletter,features,modules.features.activities,modules.features.details,modules.features.activities,solutionComp,metas.shareImage&filters%5Bslug%5D%5B%24eq%5D=${slug}&publicationState=${publicationState}`, {
+        cache: "no-store",
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -34,35 +35,19 @@ async function getData(slug: string) {
 }
 
 export const generateMetadata = async ({params}: { params: { slug: string } }): Promise<Metadata> => {
-    const {BACK_URL, FRONT_URL} = process.env;
     const solution = await getSolution(params.slug)
     const global = await getGlobal();
-    const metas = solution[0]?.attributes.metas
+    const attributes = solution[0]?.attributes;
 
-    return {
-        metadataBase: new URL(FRONT_URL + "/" + params.slug),
-        title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
-        description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-        openGraph: {
-            title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
-            siteName: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
-            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-            url: FRONT_URL + "/" + params.slug,
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            site: FRONT_URL + "/" + params.slug,
-            title: metas?.meta_title || "Wenegoce, éditeur de solution logicielles métier",
-            description: metas?.meta_description || "Solutions logicielles de gestion : Wenegoce",
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        icons: {
-            icon: `${BACK_URL}${global?.favicon.data.attributes.url}`,
-            apple: `${BACK_URL}${global?.favicon.data.attributes.url}`,
-            shortcut: `${BACK_URL}${global?.favicon.data.attributes.url}`
-        }
-    }
+    return buildSeoMetadata({
+        metas: attributes?.metas,
+        path: `/solutions/${params.slug}`,
+        title: attributes?.solution || attributes?.HeroPage?.content?.teaser || "Solution logicielle Wenegoce",
+        description: "Solution logicielle Wenegoce pour optimiser la gestion de votre activite metier.",
+        siteName: global?.siteName,
+        fallbackImage: attributes?.brandImg?.data?.attributes?.url,
+        favicon: global?.favicon,
+    });
 };
 
 const Solution = async ({params}: { params: { slug: string } }) => {
@@ -103,7 +88,7 @@ const Solution = async ({params}: { params: { slug: string } }) => {
             <ReassuranceSolution data={data[0]?.attributes?.reassurance} colors={colors}/>
             {data[0]?.attributes?.solutionComp.length ?
                 <RelatedServices
-                    title="En complément"
+                    title="En complement"
                     solutions={data[0]?.attributes?.solutionComp.map((solution: any) => solution.solution)}/>
                 :
                 null

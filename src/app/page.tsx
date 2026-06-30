@@ -10,36 +10,19 @@ import getHome from "@/actions/getHome";
 import CtaHome from "@/sections/CtaHome";
 import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
+import {buildSeoMetadata} from "@/lib/seo";
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const {BACK_URL} = process.env;
+    const home = await getHome();
     const global = await getGlobal();
-    const metas = global.metas
 
-    return {
-        metadataBase: new URL(global?.canonical_url),
-        title: metas.meta_title || "Massalikulu'lum | Formateur en langue arabe",
-        description: metas?.meta_description || "L'institut Massalikul'ulum offre des cours d'arabe de haute qualité à différents niveaux, ainsi que des cours d'apprentissage du Coran ",
-        openGraph: {
-            title: metas?.meta_title || "Massalikulu'lum | Formateur en langue arabe",
-            siteName: metas?.meta_title || "Massalikulu'lum | Formateur en langue arabe",
-            description: metas?.meta_description || "L'institut Massalikul'ulum offre des cours d'arabe de haute qualité à différents niveaux, ainsi que des cours d'apprentissage du Coran ",
-            url: global?.canonical_url,
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            site: global?.canonical_url,
-            title: metas?.meta_title || "Massalikulu'lum | Formateur en langue arabe",
-            description: metas?.meta_description || "L'institut Massalikul'ulum offre des cours d'arabe de haute qualité à différents niveaux, ainsi que des cours d'apprentissage du Coran ",
-            images: [`${BACK_URL}${metas?.shareImage?.data?.attributes.url}` || ""],
-        },
-        icons: {
-            icon: `${BACK_URL}${global?.favicon.data?.attributes.url}`,
-            apple: `${BACK_URL}${global?.favicon.data?.attributes.url}`,
-            shortcut: `${BACK_URL}${global?.favicon.data?.attributes.url}`
-        }
-    }
+    return buildSeoMetadata({
+        metas: home?.metas || global?.metas,
+        title: "Wenegoce, editeur de solutions logicielles metier",
+        description: "Solutions logicielles de gestion pour les metiers du negoce, du service et de la distribution.",
+        siteName: global?.siteName,
+        favicon: global?.favicon,
+    });
 };
 
 export default async function Home() {
@@ -50,17 +33,15 @@ export default async function Home() {
     })
 
     return (
-        <>
-            <HydrationBoundary state={dehydrate(queryClient)}>
+        <HydrationBoundary state={dehydrate(queryClient)}>
             <HeroHome/>
             <SolutionsUsers />
             <Testimonials />
             <Solution />
             <ReassuranceHome />
-            <Strengths /> 
+            <Strengths />
             <Support />
             <CtaHome />
-            </HydrationBoundary>
-        </>
+        </HydrationBoundary>
     );
 }

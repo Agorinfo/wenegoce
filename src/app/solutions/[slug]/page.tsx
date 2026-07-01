@@ -13,6 +13,7 @@ import getSolution from "@/actions/getSolution";
 import emptyImg from "@/assets/empty-img.png";
 import {draftMode} from "next/headers";
 import {buildSeoMetadata} from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 async function getData(slug: string) {
     const {API_URL, API_KEY, STRAPI_PREVIEW_TOKEN} = process.env
@@ -52,10 +53,15 @@ export const generateMetadata = async ({params}: { params: { slug: string } }): 
 
 const Solution = async ({params}: { params: { slug: string } }) => {
     const data = await getData(params.slug);
+    const title = data[0]?.attributes?.solution || data[0]?.attributes?.HeroPage?.content?.teaser || "Solution";
     const colors = createColorPalette(data[0]?.attributes.brandColor ? data[0]?.attributes.brandColor : "#000000");
 
     return (
         <>
+            <Breadcrumbs items={[
+                {label: "Solutions", href: "/solutions"},
+                {label: title},
+            ]} />
             <HeroPage
                 images={data[0]?.attributes.HeroPage?.images}
                 teaser={data[0]?.attributes.HeroPage?.content.teaser}

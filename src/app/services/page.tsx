@@ -11,6 +11,7 @@ import HeroArchiveServices from "@/sections/HeroArchiveServices";
 import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
 import {buildSeoMetadata} from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const generateMetadata = async (): Promise<Metadata> => {
     const global = await getGlobal();
@@ -42,6 +43,7 @@ const Services = async () => {
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
+            <Breadcrumbs items={[{label: "Services"}]} />
             <HeroArchiveServices />
             <Strengths />
             <CallToActionNewsletter />

@@ -16,6 +16,8 @@ const HeroRessources = () => {
     if(isLoading) return  <Loader />
 
     if(error) return <p>{ error?.message }</p>
+    const imageUrl = data?.archiveRessources?.image?.data?.attributes?.url;
+
 
     return (
         <section className="bg-accent-shine full-width">
@@ -60,7 +62,7 @@ const HeroRessources = () => {
                     />}
                 </div>
                 <ImageWithDecoration
-                    src={ data?.archiveRessources?.image.data ? backUrl + data?.archiveRessources?.image.data?.attributes.url : ""}
+                    src={imageUrl ? backUrl + imageUrl : ""}
                     alt={data?.archiveRessources?.image.data?.attributes.alternativeText}
                     layout="square"
                 />

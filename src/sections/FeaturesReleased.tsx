@@ -30,6 +30,7 @@ interface FeatureReleasedProps {
 
 const FeaturesReleased = ({data, image, colors}: FeatureReleasedProps) => {
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
+    const imageUrl = image?.data?.attributes?.url;
     return (
         <>
             {data && image ?
@@ -39,8 +40,8 @@ const FeaturesReleased = ({data, image, colors}: FeatureReleasedProps) => {
                     ))}
                     {image.data ?
                         <Image
-                            src={image.data ? backUrl + image.data.attributes.url : emptyImg.src}
-                            alt={image.data ? image.data.attributes.alternativeText : ""}
+                            src={imageUrl ? backUrl + imageUrl : emptyImg}
+                            alt={image?.data?.attributes?.alternativeText || ""}
                             width={640}
                             height={480}
                         />

@@ -7,6 +7,7 @@ import getService from "@/actions/getService";
 import type {Metadata} from "next";
 import getGlobal from "@/actions/getGlobal";
 import {buildSeoMetadata} from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const generateMetadata = async ({params}: {params : {slug: string}}): Promise<Metadata> => {
     const global = await getGlobal();
@@ -28,11 +29,16 @@ const Service = async ({params}: {params : {slug: string}}) => {
     const data = await getService(params.slug);
 
     if(!data) return <Loader />;
+    const title = data[0].attributes.hero.title;
 
     return (
         <>
+            <Breadcrumbs items={[
+                {label: "Services", href: "/services"},
+                {label: title},
+            ]} />
             <HeroService
-                title={data[0].attributes.hero.title}
+                title={title}
                 icon={data[0].attributes.hero.icon}
                 teaser={data[0].attributes.hero.teaser}
                 steps={data[0].attributes.step}

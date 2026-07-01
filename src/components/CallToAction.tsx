@@ -151,6 +151,7 @@ export const CallToActionImage = ({
                                       background
                                   }: CallToActionImageType) => {
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
+    const imageUrl = image?.data?.attributes?.url;
 
     return (
         <section className={clsx(`py-6 sm:py-8 lg:py-12 full-width`,
@@ -199,7 +200,7 @@ export const CallToActionImage = ({
                 >
                     <Image
                         className="object-cover object-center"
-                        src={image && image.data ? backUrl + image.data.attributes.url : emptyImg.src}
+                        src={imageUrl ? backUrl + imageUrl : emptyImg}
                         alt={image && image.data ? image.data.attributes.alternativeText : ""}
                         fill
                         sizes="(min-width: 1024px) 60vw, 100vw"

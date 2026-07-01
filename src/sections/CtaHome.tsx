@@ -15,6 +15,7 @@ const CtaHome = () => {
     });
 
     const {title, text, label, url, image} = data.callToAction;
+    const imageUrl = image?.data?.attributes?.url;
 
     if (isLoading) return <Loader/>
 
@@ -35,7 +36,7 @@ const CtaHome = () => {
                 <div className="relative lg:col-span-3 h-48 sm:h-auto md:h-80 w-full object-cover">
                     <Image
                         className="object-cover object-center"
-                        src={image.data ? backUrl + image.data.attributes.url : emptyImg.src}
+                        src={imageUrl ? backUrl + imageUrl : emptyImg}
                         alt={image.data ? image.data.attributes.alternativeText : ""}
                         fill
                         sizes="(min-width: 1024px) 60vw, 100vw"

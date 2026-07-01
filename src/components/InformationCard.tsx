@@ -40,6 +40,9 @@ interface InformationCardProps {
 
 const InformationCard = ({logo, data, modules, badge, icon, colors}: InformationCardProps) => {
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
+    const imageUrl = data.image?.data?.attributes?.url;
+    const logoUrl = logo?.data?.attributes?.url;
+
     return (
         <motion.div
             key={"card"}
@@ -49,11 +52,11 @@ const InformationCard = ({logo, data, modules, badge, icon, colors}: Information
             transition={{duration: 0.7}}
             className="flex text-grayscale-darkest lg:h-[14.875rem] bg-white rounded-lg">
             <div className="relative w-[14.875rem] hidden lg:block">
-                {data?.image?.data &&
+                {imageUrl &&
                     <Image
                         className="hidden lg:block object-cover rounded-l-lg"
-                        src={backUrl + data.image.data.attributes.url}
-                        alt={data.image.data.attributes.alternativeText}
+                        src={backUrl + imageUrl}
+                        alt={data.image?.data?.attributes?.alternativeText || ""}
                         fill
                         sizes="15rem"
                     />
@@ -63,9 +66,9 @@ const InformationCard = ({logo, data, modules, badge, icon, colors}: Information
                         <Icon name={icon} size={91} />
                     </div>
                 }
-                {logo?.data &&
+                {logoUrl &&
                     <Image
-                        src={backUrl + logo.data.attributes.url}
+                        src={backUrl + logoUrl}
                         alt={logo.data.attributes.alternativeText}
                         className="hidden lg:block absolute -bottom-4 left-4 w-32 h-12 rounded-lg shadow-slide object-cover"
                         width={128}

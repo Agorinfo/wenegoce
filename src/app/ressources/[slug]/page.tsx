@@ -6,6 +6,7 @@ import getRessource from "@/actions/getRessource";
 import HeroRessource from "@/components/HeroRessource";
 import RessourceContent from "@/components/RessourceContent";
 import {buildSeoMetadata} from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const generateMetadata = async ({params}: { params: { slug: string } }): Promise<Metadata> => {
     const global = await getGlobal();
@@ -25,13 +26,19 @@ export const generateMetadata = async ({params}: { params: { slug: string } }): 
 };
 
 const Ressource = async ({params}: { params: { slug: string } }) => {
+    const ressource = await getRessource(params.slug);
+    const title = ressource[0]?.attributes?.title || "Ressource";
     const queryClient = new QueryClient()
     await queryClient.prefetchQuery({
         queryKey: ["ressource", params.slug],
-        queryFn: () => getRessource(params.slug),
+        queryFn: () => Promise.resolve(ressource),
     })
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
+            <Breadcrumbs items={[
+                {label: "Ressources", href: "/ressources"},
+                {label: title},
+            ]} />
             <HeroRessource/>
             <RessourceContent/>
         </HydrationBoundary>

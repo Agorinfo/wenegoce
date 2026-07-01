@@ -20,6 +20,7 @@ const Footer = ({}) => {
     if (isLoading) return <Loader/>
 
     if (error) return <p>{error.message}</p>
+    const logoUrl = data.logo?.data?.attributes?.url;
     return (
         <footer className="content-grid">
             <div className="grid grid-cols-2 gap-8 md:gap-0 md:grid-cols-7 border-t pt-12">
@@ -27,7 +28,7 @@ const Footer = ({}) => {
                     <div className="pb-4 w-[180px]">
                         <Image
                             className="w-full h-auto"
-                            src={data.logo.data ? backUrl + data.logo.data.attributes.url : emptyImg.src}
+                            src={logoUrl ? backUrl + logoUrl : emptyImg}
                             alt={data.logo.data ? data.logo.data.attributes.alternativeText : ""}
                             width={180}
                             height={60}

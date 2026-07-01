@@ -9,6 +9,7 @@ import getFaq from "@/actions/getFaq";
 import SectionFaq from "@/components/SectionFaq";
 import getAllRessources from "@/actions/getAllRessources";
 import {buildSeoMetadata} from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const generateMetadata = async (): Promise<Metadata> => {
     const global = await getGlobal();
@@ -48,6 +49,7 @@ const Ressources = async () => {
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
+            <Breadcrumbs items={[{label: "Ressources"}]} />
             <HeroRessources/>
             <RessourceGridItems/>
             <SectionFaq />

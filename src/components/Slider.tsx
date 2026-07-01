@@ -1,7 +1,7 @@
 'use client'
 import {useState} from "react";
 import {motion, AnimatePresence} from "framer-motion";
-import {ArrowLeft, ArrowRight} from "@phosphor-icons/react";
+import { ArrowLeftIcon, ArrowRightIcon} from "@phosphor-icons/react";
 import clsx from "clsx";
 import Icon from "@/components/icons/Icon";
 import emptyImg from "@/assets/empty-img.png";
@@ -62,6 +62,7 @@ const transforms = {
 export default function Slider({images, logo, layout = "square"}: Props) {
     const [index, setIndex] = useState(0);
     const currentImage = images?.[index]?.attributes;
+    const currentImageUrl = currentImage?.formats?.small?.url || currentImage?.url;
 
     const isLandscape = layout === "landscape";
 
@@ -86,7 +87,7 @@ export default function Slider({images, logo, layout = "square"}: Props) {
                 {logo && (
                     <div className="absolute top-6 left-4 w-24 h-10 z-20">
                         <Image
-                            src={backUrl + logo.data.attributes.url}
+                            src={logo.data.attributes.url ? backUrl + logo.data.attributes.url : emptyImg}
                             alt={logo.data.attributes.alternativeText}
                             className="w-full h-full object-contain bg-white"
                             width={96}
@@ -105,17 +106,11 @@ export default function Slider({images, logo, layout = "square"}: Props) {
                         <div className="relative h-full w-full overflow-hidden rounded-lg">
                             <Image
                                 key={currentImage?.url || "empty"}
-                                src={
-                                    currentImage
-                                        ? currentImage.formats?.small
-                                            ? backUrl + currentImage.formats.small.url
-                                            : backUrl + currentImage.url
-                                        : emptyImg.src
-                                }
+                                src={currentImageUrl ? backUrl + currentImageUrl : emptyImg}
                                 alt={currentImage?.alternativeText || ""}
                                 className="object-cover"
                                 fill
-                                sizes={isLandscape ? "36rem" : "28rem"}
+                                sizes={isLandscape ? "(min-width: 768px) 576px, 90vw" : "(min-width: 768px) 448px, 90vw"}
                             />
                         </div>
                     </motion.div>
@@ -141,7 +136,7 @@ export default function Slider({images, logo, layout = "square"}: Props) {
                 )}
                 aria-label="Previous slide"
             >
-                <ArrowLeft size={40}/>
+                <ArrowLeftIcon size={40}/>
             </button>
             <button
                 onClick={handleNext}
@@ -153,7 +148,7 @@ export default function Slider({images, logo, layout = "square"}: Props) {
                 )}
                 aria-label="Next slide"
             >
-                <ArrowRight size={40}/>
+                <ArrowRightIcon size={40}/>
             </button>
         </div>
     );

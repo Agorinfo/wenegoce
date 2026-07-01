@@ -13,7 +13,7 @@ import Image from "next/image";
 const ContactForm = () => {
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     const [active, setActive] = useState("formulaire");
-    const { closeModal } = useModalStore();
+    const {closeModal} = useModalStore();
     const [loading, setLoading] = useState(false);
 
     async function handleSubmit(event: any) {
@@ -56,19 +56,21 @@ const ContactForm = () => {
         queryKey: ["footer"],
         queryFn: () => getFooter(),
     });
-
     const {siteName, street, adressComp, zipCode, city, tel, email, addressComp, portalUrl, logo} = data;
+    const logoUrl = logo?.data?.attributes?.url;
 
-    const telUrl= tel.replaceAll(" ", "").substring(1);
+    const telUrl = tel.replaceAll(" ", "").substring(1);
     const telCompUrl = addressComp?.tel.replaceAll(" ", "").substring(1);
 
-    if(isLoading || footerData.isLoading) return <Loader />
+    if (isLoading || footerData.isLoading) return <Loader/>
 
-    if(error || footerData.error) return <p>{error?.message || footerData.error?.message}</p>
+    if (error || footerData.error) return <p>{error?.message || footerData.error?.message}</p>
 
     return (
         <div className="flex flex-col lg:flex-row bg-white">
-            <h2 className="text-h3 font-bold capitalize pt-8 px-8 pb-6 lg:hidden">Contacter <span className="text-[#3965bd] font-bold">We</span><span className='font-light text-[#646464]'>Négoce</span></h2>
+            <h2 className="text-h3 font-bold capitalize pt-8 px-8 pb-6 lg:hidden">Contacter <span
+                className="text-[#3965bd] font-bold">We</span><span className='font-light text-[#646464]'>Négoce</span>
+            </h2>
             <div className="lg:hidden px-8 flex">
                 <div className="flex justify-start items-start gap-1 rounded-lg border overflow-hidden">
                     <button
@@ -88,15 +90,16 @@ const ContactForm = () => {
             <div
                 className={`p-8 flex flex-col justify-between items-start lg:border-r lg:border-grayscale-lighter lg:w-[33.333vw] max-w-[32rem] lg:block ${active === "coordonnees" ? "block" : "hidden lg:block"}`}>
                 <div className="">
-                    <div className="pb-6 hidden lg:block w-[17.5rem]">
-                        <Image
-                            className="w-full h-auto"
-                            src={logo.data ? backUrl + logo.data.attributes.url : emptyImg.src}
-                            alt={logo.data.attributes.alternativeText}
-                            width={280}
-                            height={90}
-                        />
-                    </div>
+                    {logoUrl &&
+                        <div className="pb-6 hidden lg:block w-[17.5rem]">
+                            <Image
+                                className="w-full h-auto"
+                                src={logo.data ? backUrl + logo.data.attributes.url : emptyImg.src}
+                                alt={logo.data.attributes.alternativeText}
+                                width={280}
+                                height={90}
+                            />
+                        </div>}
                     <div className="divide-y">
                         <div className="flex flex-col gap-2 pb-6">
                             <h3 className="text-h6 font-bold">À Rouen</h3>
@@ -237,7 +240,8 @@ const ContactForm = () => {
                             </textarea>
                     </label>
                     <div className="flex items-center justify-between col-span-full">
-                        <button className="btn btn-accent mb-4" type={"submit"} >{loading ? <LoaderButton /> : "Envoyer"}</button>
+                        <button className="btn btn-accent mb-4" type={"submit"}>{loading ?
+                            <LoaderButton/> : "Envoyer"}</button>
                         <span className={"text-sm text-grayscale-darker"}>* Obligatoire</span>
                     </div>
                     <p className="text-sm text-grayscale-darker col-span-full">En envoyant ce message, vous acceptez

@@ -49,6 +49,10 @@ interface HeroServiceProps {
 const HeroService = ({icon, title, teaser, heroImg, steps, stepImg, logo}: HeroServiceProps) => {
     const backUrl = process.env.NEXT_PUBLIC_BACK_URL;
     const width = useScreenSize();
+    const heroImageUrl = heroImg?.[0]?.attributes?.url;
+    const logoUrl = logo?.data?.attributes?.url;
+    const stepImageUrl = stepImg?.data?.attributes?.url;
+
     return (
         <>
             <div className="bg-featured-shine full-width">
@@ -70,7 +74,7 @@ const HeroService = ({icon, title, teaser, heroImg, steps, stepImg, logo}: HeroS
                                 <Image
                                     id="service-hero-img"
                                     className="object-cover object-center"
-                                    src={heroImg ? backUrl + heroImg[0].attributes.url : emptyImg.src}
+                                    src={heroImageUrl ? backUrl + heroImageUrl : emptyImg}
                                     alt={heroImg && heroImg[0].attributes.alternativeText ? heroImg[0].attributes.alternativeText : ""}
                                     fill
                                     sizes="27rem"
@@ -79,7 +83,7 @@ const HeroService = ({icon, title, teaser, heroImg, steps, stepImg, logo}: HeroS
                             {logo.data &&
                                 <Image
                                     className="w-[8rem] h-[4.2rem] rounded-lg absolute top-6 -left-4"
-                                    src={logo.data ? backUrl + logo.data.attributes.url : emptyImg.src}
+                                    src={logoUrl ? backUrl + logoUrl : emptyImg}
                                     alt={logo.data ? logo.data.attributes.alternativeText : ""}
                                     width={128}
                                     height={67}
@@ -97,7 +101,7 @@ const HeroService = ({icon, title, teaser, heroImg, steps, stepImg, logo}: HeroS
                         <Image
                             id="service-hero-img"
                             className="object-cover object-center"
-                            src={heroImg ? backUrl + heroImg[0].attributes.url : emptyImg.src}
+                            src={heroImageUrl ? backUrl + heroImageUrl : emptyImg}
                             alt={heroImg && heroImg[0].attributes.alternativeText ? heroImg[0].attributes.alternativeText : ""}
                             fill
                             sizes="27rem"
@@ -106,7 +110,7 @@ const HeroService = ({icon, title, teaser, heroImg, steps, stepImg, logo}: HeroS
                     {logo.data &&
                         <Image
                             className="w-[8rem] h-[4.2rem] rounded-lg absolute top-6 -left-4"
-                            src={logo.data ? backUrl + logo.data.attributes.url : emptyImg.src}
+                            src={logoUrl ? backUrl + logoUrl : emptyImg}
                             alt={logo.data ? logo.data.attributes.alternativeText : ""}
                             width={128}
                             height={67}
@@ -133,7 +137,7 @@ const HeroService = ({icon, title, teaser, heroImg, steps, stepImg, logo}: HeroS
                 <Image
                     className="lg:row-start-4 lg:row-end-5 mx-auto max-w-[30.6875rem] max-h-[24rem]"
                     id={"service-steps-img"}
-                    src={stepImg.data ? backUrl + stepImg.data.attributes.url : emptyImg.src}
+                    src={stepImageUrl ? backUrl + stepImageUrl : emptyImg}
                     alt={stepImg.data ? stepImg.data.attributes.alternativeText : ""}
                     width={491}
                     height={384}

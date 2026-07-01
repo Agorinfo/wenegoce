@@ -87,6 +87,7 @@ const HeroArchive = ({teaser, text, label, url, modules,}: HeroArchiveType) => {
                     {active &&
                         modules.filter(module => active === module.attributes.slug).map(item => {
                             const {heroArchive} = item.attributes;
+                            const logoUrl = heroArchive.logo?.data?.attributes?.url;
                             return (
                                 <motion.div
                                     key={"service-" + item.id}
@@ -96,10 +97,10 @@ const HeroArchive = ({teaser, text, label, url, modules,}: HeroArchiveType) => {
                                     transition={{duration: 0.5}}
                                     className="w-full flex flex-col justify-between h-full lg:justify-center"
                                 >
-                                    {heroArchive.logo &&
+                                    {logoUrl &&
                                         <Image
-                                            src={backUrl + heroArchive.logo.data.attributes.url}
-                                            alt={heroArchive.logo.data.attributes.alternativeText}
+                                            src={backUrl + logoUrl}
+                                            alt={heroArchive.logo?.data?.attributes?.alternativeText || ""}
                                             className="lg:hidden w-32 h-12 rounded-lg shadow-slide object-cover mb-4"
                                             width={128}
                                             height={48}

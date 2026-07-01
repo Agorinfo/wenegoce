@@ -4,6 +4,7 @@ import getGlobal from "@/actions/getGlobal";
 import getRgpd from "@/actions/getRgpd";
 import RichText from "@/components/RichText";
 import {buildSeoMetadata} from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const generateMetadata = async (): Promise<Metadata> => {
     const rgpd = await getRgpd();
@@ -25,6 +26,7 @@ const Rgpd = async () => {
 
     return (
         <div className="py-8 md:py-12 text-sm">
+            <Breadcrumbs items={[{label: "RGPD"}]} />
             <RichText content={rgpd.content}/>
             <div className="border">
                 <div className="hidden md:flex divide-x md:justify-between md:items-center md:py-2 md:border-b">

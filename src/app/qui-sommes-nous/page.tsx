@@ -11,6 +11,7 @@ import getGlobal from "@/actions/getGlobal";
 import CtaAbout from "@/sections/CtaAbout";
 import StepAbout from "@/sections/StepAbout";
 import {buildSeoMetadata} from "@/lib/seo";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const generateMetadata = async (): Promise<Metadata> => {
     const about = await getAbout();
@@ -35,6 +36,7 @@ const About = async () => {
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
+            <Breadcrumbs items={[{label: "Qui sommes-nous"}]} />
             <HeroAbout />
             <Expertises />
             <Story />

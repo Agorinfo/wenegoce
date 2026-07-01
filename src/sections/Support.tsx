@@ -17,6 +17,7 @@ const Support = () => {
     });
 
     const {image} = data.support;
+    const imageUrl = image?.data?.attributes?.url;
     const {content, teaser, label1, url1, label2, url2} = data.support.content;
 
     if (isLoading) return <Loader/>
@@ -29,7 +30,7 @@ const Support = () => {
                 <div className="grid md:grid-cols-2 gap-[5.729vw] xl:gap-[3.5vw]">
                     <Image
                         className="w-full h-auto object-contain"
-                        src={image.data ? backUrl + image.data.attributes.url : emptyImg.src}
+                        src={imageUrl ? backUrl + imageUrl : emptyImg}
                         alt={image.data ? image.data.attributes.alternativeText : ""}
                         width={640}
                         height={480}

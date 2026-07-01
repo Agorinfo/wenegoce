@@ -93,7 +93,7 @@ const Nav = ({navItems, isOpen, setIsOpen}: NavItemsType) => {
                                         <div className="bg-white rounded-lg overflow-hidden flex flex-col">
                                             <div className="relative hidden flex-auto min-h-48 lg:block">
                                                 <Image className="object-cover"
-                                                     src={item.image.data ? backUrl + item.image.data.attributes.url : emptyImg.src}
+                                                     src={item.image.data?.attributes?.url ? backUrl + item.image.data.attributes.url : emptyImg.src}
                                                      alt={item.image.data ? item.image.data.attributes.alternativeText : ""}
                                                      fill
                                                      sizes="33vw"/>

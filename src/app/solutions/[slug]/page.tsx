@@ -53,13 +53,13 @@ export const generateMetadata = async ({params}: { params: { slug: string } }): 
 
 const Solution = async ({params}: { params: { slug: string } }) => {
     const data = await getData(params.slug);
-    const title = data[0]?.attributes?.solution || data[0]?.attributes?.HeroPage?.content?.teaser || "Solution";
+    const title = data[0]?.attributes?.name;
     const colors = createColorPalette(data[0]?.attributes.brandColor ? data[0]?.attributes.brandColor : "#000000");
 
     return (
         <>
             <Breadcrumbs items={[
-                {label: "Solutions", href: "/solutions"},
+                {label: "La solution"},
                 {label: title},
             ]} />
             <HeroPage

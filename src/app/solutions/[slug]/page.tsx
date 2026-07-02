@@ -59,7 +59,6 @@ const Solution = async ({params}: { params: { slug: string } }) => {
     return (
         <>
             <Breadcrumbs items={[
-                {label: "La solution"},
                 {label: title},
             ]} />
             <HeroPage

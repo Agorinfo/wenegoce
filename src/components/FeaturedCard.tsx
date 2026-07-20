@@ -30,7 +30,7 @@ const FeaturedCard = ({icon, title, text, colors, iconClassName, className, link
             </div>
             <div>
                 {!link ?
-                    <h3 className="mb-2 text-lg font-semibold md:text-xl">{title}</h3>
+                    <h2 className="mb-2 text-lg font-semibold md:text-xl">{title}</h2>
                     :
                     <Link href={link} className="mb-2 text-lg font-semibold md:text-xl">{title}</Link>
                 }

@@ -16,6 +16,7 @@ export type SeoMetas = {
     meta_description?: string | null;
     shareImage?: StrapiImage | null;
     canonical?: string | null;
+    canonicalUrl?: string | null;
     canonicalURL?: string | null;
     canonical_url?: string | null;
     metaRobots?: string | null;
@@ -78,7 +79,7 @@ export function buildSeoMetadata({
     const pageTitle = metas?.meta_title || title;
     const pageDescription = metas?.meta_description || description;
     const canonicalPath = path ? `/${path.replace(/^\/+/, "")}` : "";
-    const canonicalUrl = metas?.canonical || metas?.canonicalURL || metas?.canonical_url || `${getFrontUrl()}${canonicalPath}`;
+    const canonicalUrl = metas?.canonical || metas?.canonicalUrl || metas?.canonicalURL || metas?.canonical_url || `${getFrontUrl()}${canonicalPath}`;
     const imageUrl = getImageUrl(metas?.shareImage) || toAbsoluteUrl(fallbackImage);
     const robotsFromMeta = parseRobots(metas?.metaRobots || metas?.robots);
     const shouldIndex = !(metas?.noIndex || noIndex) && robotsFromMeta.index;
